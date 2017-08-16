@@ -1,31 +1,36 @@
 class Game
-  def initialize(stdout=STDOUT, stdin=STDIN)
+    
+  attr_accessor :outgoing, :incoming
+    
+  def initialize(outgoing, incoming)
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
     @com = "X" # the computer's marker
     @hum = "O" # the user's marker
-    @stdout = stdout
-    @stdin = stdin
+    
+    self.outgoing = outgoing
+    self.incoming = incoming
+  
   end
 
   def start_game
     # start by printing the board
-    @stdout.puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
-    @stdout.puts "Enter [0-8]:"
+    outgoing.puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+    outgoing.puts "Enter [0-8]:"
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
       get_human_spot
       if !game_is_over(@board) && !tie(@board)
         eval_board
       end
-      @stdout.puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
+      outgoing.puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
     end
-    @stdout.puts "Game over"
+    outgoing.puts "Game over"
   end
 
   def get_human_spot
     spot = nil
-    until spot
-      spot = @stdin.gets.chomp.to_i
+    until spot do
+      spot = incoming.gets.chomp.to_i
       if @board[spot] != "X" && @board[spot] != "O"
         @board[spot] = @hum
       else
@@ -102,5 +107,5 @@ class Game
 
 end
 
-game = Game.new
-game.start_game
+#game = Game.new($stdout, $stdin)
+#game.start_game
