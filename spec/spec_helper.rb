@@ -15,6 +15,7 @@
 require 'simplecov'
 require 'simplecov-console'
 require 'rspec'
+require File.join(File.dirname(__FILE__), '../lib/', 'game.rb')
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::Console,
