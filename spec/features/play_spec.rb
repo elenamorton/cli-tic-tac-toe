@@ -54,6 +54,19 @@ describe Game do
                           "===+===+===\n" \
                           " #{hum} | 7 | 8 \n"
     end
+    
+    it 'move is inside the board and on an invalid spaces: 1, 3, and 8 ' do
+      starting_board = "0".upto("8").to_a
+      hum = 'O'
+      spot = io("1\n3\n\8\n6\n").get_human_spot([2,6])
+      io.update_board(starting_board, spot)
+      io.display_board(starting_board)
+      expect(output).to eq " 0 | 1 | 2 \n" \
+                          "===+===+===\n" \
+                          " 3 | 4 | 5 \n" \
+                          "===+===+===\n" \
+                          " #{hum} | 7 | 8 \n"
+    end
   end
 
   it 'play a full game, user starts in a corner' do
