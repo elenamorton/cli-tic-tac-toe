@@ -21,7 +21,9 @@ class Game
 
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
-      get_human_spot
+      move = get_human_spot([0,1,2,3,4,5,6,7,8])
+      update_board(@board, move)
+      
       if !game_is_over(@board) && !tie(@board)
         eval_board
       end
@@ -34,18 +36,14 @@ class Game
     outgoing.puts board_stringify(board)
   end
     
-  def get_human_spot
-    spot = nil
-    until spot do
-      spot = get_input("Enter your move", /\A\d+\Z/).to_i
-      if @board[spot] != "X" && @board[spot] != "O"
-        @board[spot] = @hum
-      else
-        spot = nil
-      end
-    end
-    spot
+  def get_human_spot(valid_spots)
+    get_input("Enter your move", /\A[#{valid_spots.join('')}]\Z/).to_i
   end
+  
+  def update_board(board, spot)
+    board[spot] = @hum
+  end
+  
 
   def eval_board
     spot = nil
@@ -116,7 +114,8 @@ class Game
   private
   
   def get_input(message_prompt, validation)
-    outgoing.print message_prompt, ': '
+    outgoing.print message_prompt
+    outgoing.puts ': '
     input = incoming.gets.chomp
     return input if input =~ validation
     invalid_data input
