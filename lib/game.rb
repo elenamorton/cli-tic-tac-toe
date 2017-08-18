@@ -18,11 +18,13 @@ class Game
   def start_game
     # start by printing the board
     display_board(@board)
-
+    valid_moves = @board.map{ |move| move.to_i}
+    
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
-      move = get_human_spot([0,1,2,3,4,5,6,7,8])
+      move = get_human_spot(valid_moves)
       update_board(@board, move)
+      valid_moves.delete(move)
       
       if !game_is_over(@board) && !tie(@board)
         eval_board
@@ -35,16 +37,15 @@ class Game
   def display_board(board)
     outgoing.puts board_stringify(board)
   end
+  
+  def update_board(board, spot)
+    board[spot] = @hum
+  end
     
   def get_human_spot(valid_spots)
     get_input("Enter your move", /\A[#{valid_spots.join('')}]\Z/).to_i
   end
   
-  def update_board(board, spot)
-    board[spot] = @hum
-  end
-  
-
   def eval_board
     spot = nil
     until spot
@@ -114,8 +115,7 @@ class Game
   private
   
   def get_input(message_prompt, validation)
-    outgoing.print message_prompt
-    outgoing.puts ': '
+    prompt message_prompt
     input = incoming.gets.chomp
     return input if input =~ validation
     invalid_data input
@@ -124,6 +124,11 @@ class Game
   
   def invalid_data(data)
     outgoing.puts "You've entered #{data}, which is invalid"
+  end
+  
+  def prompt(message)
+    outgoing.print message
+    outgoing.puts ': '
   end
 
   def board_stringify(board)
