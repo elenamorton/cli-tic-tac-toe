@@ -39,6 +39,22 @@ describe Game do
                           " 6 | 7 | 8 \n"
     end
   end
+  
+  describe 'asking for the user move' do
+    
+    it 'move is inside the board and on unoccupied space' do
+      starting_board = "0".upto("8").to_a
+      hum = 'O'
+      spot = io('6').get_human_spot
+      expect(starting_board[spot]).to eq "#{hum}"
+      io.display_board(starting_board)
+      expect(output).to eq " 0 | 1 | 2 \n" \
+                          "===+===+===\n" \
+                          " 3 | 4 | 5 \n" \
+                          "===+===+===\n" \
+                          " #{hum} | 7 | 8 \n"
+    end
+  end
 
   it 'play a full game, user starts in a corner' do
     io("8\n6\n1\n5\n0\n3\n").start_game
