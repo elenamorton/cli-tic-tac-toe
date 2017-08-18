@@ -18,13 +18,13 @@ describe Game do
   end
   
   it 'displaying an empty board' do
-    empty_board = Array.new(9) { nil }
+    empty_board = [0...8]
     io.display_board(empty_board)
-    expect(output).to eq "   |   |   \n" \
+    expect(output).to eq " 0 | 1 | 2 \n" \
                         "===+===+===\n" \
-                        "   |   |   \n" \
+                        " 3 | 4 | 5 \n" \
                         "===+===+===\n" \
-                        "   |   |   \n"
+                        " 6 | 7 | 8 \n"
   end
 
   it 'play a full game, user starts in a corner' do
