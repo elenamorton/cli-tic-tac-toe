@@ -1,11 +1,14 @@
 class Game
     
   attr_accessor :outgoing, :incoming
+  
+  HUMAN_MARKER = "O"
+  COMPUTER_MARKER = "X"
     
   def initialize(outgoing, incoming)
     @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
-    @com = "X" # the computer's marker
-    @hum = "O" # the user's marker
+    @com = COMPUTER_MARKER # the computer's marker
+    @hum = HUMAN_MARKER # the user's marker
     
     self.outgoing = outgoing
     self.incoming = incoming
@@ -15,7 +18,7 @@ class Game
   def start_game
     # start by printing the board
     display_board(@board)
-    outgoing.puts "Enter [0-8]:"
+
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
       get_human_spot
@@ -34,13 +37,14 @@ class Game
   def get_human_spot
     spot = nil
     until spot do
-      spot = incoming.gets.chomp.to_i
+      spot = get_input("Enter your move", /\A\d+\Z/).to_i
       if @board[spot] != "X" && @board[spot] != "O"
         @board[spot] = @hum
       else
         spot = nil
       end
     end
+    spot
   end
 
   def eval_board
@@ -111,6 +115,18 @@ class Game
   
   private
   
+  def get_input(message_prompt, validation)
+    outgoing.print message_prompt, ': '
+    input = incoming.gets.chomp
+    return input if input =~ validation
+    invalid_data input
+    get_input(message_prompt, validation)
+  end
+  
+  def invalid_data(data)
+    outgoing.puts "You've entered #{data}, which is invalid"
+  end
+
   def board_stringify(board)
     board.map { |val| val || ' ' }
         .each_slice(3)
