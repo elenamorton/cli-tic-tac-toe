@@ -18,7 +18,7 @@ describe Game do
   end
   
   it 'displaying an empty board' do
-    empty_board = [0...8]
+    empty_board = "0".upto("8").to_a
     io.display_board(empty_board)
     expect(output).to eq " 0 | 1 | 2 \n" \
                         "===+===+===\n" \
