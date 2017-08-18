@@ -28,7 +28,7 @@ class Game
   end
 
   def display_board(board)
-    outgoing.puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n===+===+===\n #{@board[3]} | #{@board[4]} | #{@board[5]} \n===+===+===\n #{@board[6]} | #{@board[7]} | #{@board[8]} \n"    
+    outgoing.puts board_stringify(board)
   end
     
   def get_human_spot
@@ -107,6 +107,15 @@ class Game
 
   def tie(b)
     b.all? { |s| s == "X" || s == "O" }
+  end
+  
+  private
+  
+  def board_stringify(board)
+    board.map { |val| val }
+        .each_slice(3)
+        .map {|col1, col2, col3| " #{col1} | #{col2} | #{col3} \n" }
+        .join("===+===+===\n")
   end
 
 end
