@@ -19,6 +19,16 @@ describe Game do
   
   describe '#display_board' do
     
+    it 'displaying an empty board with no chars' do
+      empty_board = Array.new(9) { nil }
+      io.display_board(empty_board)
+      expect(output).to eq "   |   |   \n" \
+                          "===+===+===\n" \
+                          "   |   |   \n" \
+                          "===+===+===\n" \
+                          "   |   |   \n"
+    end
+    
     it 'displaying an starting board of 0 to 8 chars' do
       starting_board = "0".upto("8").to_a
       io.display_board(starting_board)
