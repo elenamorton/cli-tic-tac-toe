@@ -17,7 +17,7 @@ describe Game do
         @outgoing.string
     end
 
-    it 'play a full game' do
+    it 'play a full game, user starts in a corner' do
         io("8\n6\n1\n5\n0\n3\n").start_game
         expect(output).to include 'O'
         expect(output).to include 'X'
@@ -25,4 +25,11 @@ describe Game do
         expect(output).to include "===+===+==="
     end
     
+        it 'play a full game, user starts in the center' do
+        io("4\n8\n2\n6\n").start_game
+        expect(output).to include 'O'
+        expect(output).to include 'X'
+        expect(output).to include 'Game over'
+        expect(output).to include "===+===+==="
+    end
 end
