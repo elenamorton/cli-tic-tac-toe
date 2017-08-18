@@ -45,8 +45,8 @@ describe Game do
     it 'move is inside the board and on unoccupied space' do
       starting_board = "0".upto("8").to_a
       hum = 'O'
-      spot = io('6').get_human_spot
-      expect(starting_board[spot]).to eq "#{hum}"
+      expect(io('6').get_human_spot).to eq 6
+      io.update_board(starting_board)
       io.display_board(starting_board)
       expect(output).to eq " 0 | 1 | 2 \n" \
                           "===+===+===\n" \
