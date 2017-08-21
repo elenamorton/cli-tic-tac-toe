@@ -6,7 +6,7 @@ class Game
   COMPUTER_MARKER = "X"
     
   def initialize(outgoing, incoming)
-    @board = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+    @board = Board.new(3).board
     @com = COMPUTER_MARKER # the computer's marker
     @hum = HUMAN_MARKER # the user's marker
     
