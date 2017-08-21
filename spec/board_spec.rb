@@ -18,5 +18,9 @@ describe 'Board' do
     board_four = Board.new(4)
     expect(board_four.number_of_spaces).to eq 16
   end
+  
+  it 'shows the content of a board space' do
+    expect(board.content_of(3)).to eq "3"
+  end
     
 end
