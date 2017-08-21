@@ -29,6 +29,7 @@ class Game
       if !game_is_over(@board) && !tie(@board)
         eval_board
       end
+      
       display_board(@board)
     end
     outgoing.puts "Game over"
@@ -43,7 +44,7 @@ class Game
   end
     
   def get_human_spot(valid_spots)
-    get_input("Enter your move", /\A[#{valid_spots.join('')}]\Z/).to_i
+    get_input("Enter your move", /\A[#{valid_spots.join('')}]\z/).to_i
   end
   
   def eval_board
@@ -109,7 +110,7 @@ class Game
   end
 
   def tie(b)
-    b.all? { |s| s == "X" || s == "O" }
+    b.all? { |s| s == COMPUTER_MARKER || s == HUMAN_MARKER }
   end
   
   private
