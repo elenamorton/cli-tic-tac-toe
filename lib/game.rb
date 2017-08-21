@@ -55,7 +55,7 @@ class Game
         @board[spot] = @com
       else
         spot = get_best_move(@board, @com)
-        if @board[spot] != "X" && @board[spot] != "O"
+        if @board[spot] != COMPUTER_MARKER && @board[spot] != HUMAN_MARKER
           @board[spot] = @com
         else
           spot = nil
