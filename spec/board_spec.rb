@@ -19,8 +19,12 @@ describe 'Board' do
     expect(board_four.number_of_spaces).to eq 16
   end
   
-  it 'shows the content of a board space' do
+  it 'shows the content of a board spot' do
     expect(board.content_of(3)).to eq "3"
+  end
+  
+  it 'updates board with a marker' do
+    expect(board.place_marker(marker, spot))
   end
     
 end
