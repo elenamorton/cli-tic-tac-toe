@@ -33,7 +33,7 @@ describe Game do
   
   describe 'asking for the user move' do
     
-    it 'move is inside the board and on unoccupied space' do
+    it 'inside the board and on unoccupied space' do
       marker = Game::HUMAN_MARKER
       spot = io('6').get_human_spot([2,6])
       io.update_board(board_play, marker, spot)
@@ -45,7 +45,7 @@ describe Game do
                           " #{marker} | 7 | 8 \n"
     end
     
-    it 'move is inside the board and on an invalid spaces: 1, 3, and 8 ' do
+    it 'inside the board and on an invalid spaces: 1, 3, and 8 ' do
       marker = Game::HUMAN_MARKER
       spot = io("1\n3\n\8\n6\n").get_human_spot([2,6])
       io.update_board(board_play, marker, spot)
