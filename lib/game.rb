@@ -55,13 +55,15 @@ class Game
   def eval_board
     spot = nil
     until spot
-      if @board[4] == "4"
+      if @board_play.content_of(4) == "4"
         spot = 4
-        @board[spot] = @com
+        #@board[spot] = @com
+        @board= update_board(@board_play, @com, spot).board
       else
         spot = get_best_move(@board, @com)
-        if @board[spot] != COMPUTER_MARKER && @board[spot] != HUMAN_MARKER
-          @board[spot] = @com
+        if @board_play.content_of(spot) != COMPUTER_MARKER && @board_play.content_of(spot) != HUMAN_MARKER
+          @board= update_board(@board_play, @com, spot).board
+          #@board[spot] = @com
         else
           spot = nil
         end
