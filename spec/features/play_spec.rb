@@ -21,19 +21,8 @@ describe Game do
   
   describe '#display_board' do
     
-    it 'displaying an empty board with no chars' do
-      empty_board = Array.new(9) { nil }
-      io.display_board(empty_board)
-      expect(output).to eq "   |   |   \n" \
-                          "===+===+===\n" \
-                          "   |   |   \n" \
-                          "===+===+===\n" \
-                          "   |   |   \n"
-    end
-    
     it 'displaying an starting board of 0 to 8 chars' do
-      starting_board = "0".upto("8").to_a
-      io.display_board(starting_board)
+      io.display_board(board_play)
       expect(output).to eq " 0 | 1 | 2 \n" \
                           "===+===+===\n" \
                           " 3 | 4 | 5 \n" \
@@ -48,7 +37,7 @@ describe Game do
       marker = Game::HUMAN_MARKER
       spot = io('6').get_human_spot([2,6])
       io.update_board(board_play, marker, spot)
-      io.display_board(board_play.board)
+      io.display_board(board_play)
       expect(output).to eq " 0 | 1 | 2 \n" \
                           "===+===+===\n" \
                           " 3 | 4 | 5 \n" \
@@ -60,7 +49,7 @@ describe Game do
       marker = Game::HUMAN_MARKER
       spot = io("1\n3\n\8\n6\n").get_human_spot([2,6])
       io.update_board(board_play, marker, spot)
-      io.display_board(board_play.board)
+      io.display_board(board_play)
       expect(output).to eq " 0 | 1 | 2 \n" \
                           "===+===+===\n" \
                           " 3 | 4 | 5 \n" \

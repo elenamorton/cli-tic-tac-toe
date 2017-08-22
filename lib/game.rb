@@ -21,7 +21,7 @@ class Game
 
   def start_game
     # start by printing the board
-    display_board(@board)
+    display_board(@board_play)
     valid_moves = @board.map{ |move| move.to_i}
     
     # loop through until the game was won or tied
@@ -35,13 +35,13 @@ class Game
         eval_board
       end
       
-      display_board(@board)
+      display_board(@board_play)
     end
     outgoing.puts "Game over"
   end
 
-  def display_board(board)
-    outgoing.puts board_stringify(board)
+  def display_board(board_play)
+    outgoing.puts board_play.board_stringify
   end
   
   def update_board(board, marker, spot)
@@ -114,9 +114,6 @@ class Game
     [b[2], b[4], b[6]].uniq.length == 1
   end
 
-  def tie(b)
-    b.all? { |s| s == COMPUTER_MARKER || s == HUMAN_MARKER }
-  end
   
   private
   
@@ -134,14 +131,10 @@ class Game
   
   def prompt(message)
     outgoing.print "#{message}: "
-   # outgoing.puts ': '
   end
-
-  def board_stringify(board)
-    board.map { |val| val || ' ' }
-        .each_slice(3)
-        .map {|col1, col2, col3| " #{col1} | #{col2} | #{col3} \n" }
-        .join("===+===+===\n")
+  
+  def tie(b)
+    b.all? { |s| s == COMPUTER_MARKER || s == HUMAN_MARKER }
   end
 
 end
