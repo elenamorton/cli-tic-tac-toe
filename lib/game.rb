@@ -4,15 +4,19 @@ class Game
     
   attr_accessor :outgoing, :incoming
   
-  HUMAN_MARKER = "O"
-  COMPUTER_MARKER = "X"
+  O_MARKER = "O"
+  X_MARKER = "X"
+  O_SCORE = -1
+  X_SCORE = 1
+
   BOARD_WIDTH = 3
     
   def initialize(outgoing, incoming)
     @board_play = Board.new(BOARD_WIDTH)
     @board = @board_play.board
-    @com = COMPUTER_MARKER # the computer's marker
-    @hum = HUMAN_MARKER # the user's marker
+    @com = X_MARKER # the computer's marker
+    @hum = O_MARKER # the user's marker
+    @score_table = Hash.new {0}
     
     self.outgoing = outgoing
     self.incoming = incoming
@@ -37,6 +41,7 @@ class Game
       
       display_board(@board_play)
     end
+    
     outgoing.puts "Game over"
   end
 
@@ -57,13 +62,11 @@ class Game
     until spot
       if @board_play.content_of(4) == "4"
         spot = 4
-        #@board[spot] = @com
         @board= update_board(@board_play, @com, spot).board
       else
         spot = get_best_move(@board, @com)
-        if @board_play.content_of(spot) != COMPUTER_MARKER && @board_play.content_of(spot) != HUMAN_MARKER
+        if @board_play.content_of(spot) != X_MARKER && @board_play.content_of(spot) != O_MARKER
           @board= update_board(@board_play, @com, spot).board
-          #@board[spot] = @com
         else
           spot = nil
         end
@@ -75,7 +78,7 @@ class Game
     available_spaces = []
     best_move = nil
     board.each do |s|
-      if s != "X" && s != "O"
+      if s != X_MARKER && s != O_MARKER
         available_spaces << s
       end
     end
@@ -136,9 +139,13 @@ class Game
   end
   
   def tie(b)
-    b.all? { |s| s == COMPUTER_MARKER || s == HUMAN_MARKER }
+    b.all? { |s| s == X_MARKER || s == O_MARKER }
   end
 
+  def calculate_score(b)
+    
+  end
+  
 end
 
 #game = Game.new($stdout, $stdin)

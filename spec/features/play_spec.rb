@@ -34,7 +34,7 @@ describe Game do
   describe 'asking for the user move' do
     
     it 'inside the board and on unoccupied space' do
-      marker = Game::HUMAN_MARKER
+      marker = Game::O_MARKER
       spot = io('6').get_human_spot([2,6])
       io.update_board(board_play, marker, spot)
       io.display_board(board_play)
@@ -46,7 +46,7 @@ describe Game do
     end
     
     it 'inside the board and on an invalid spaces: 1, 3, and 8 ' do
-      marker = Game::HUMAN_MARKER
+      marker = Game::O_MARKER
       spot = io("1\n3\n\8\n6\n").get_human_spot([2,6])
       io.update_board(board_play, marker, spot)
       io.display_board(board_play)
@@ -60,16 +60,16 @@ describe Game do
 
   it 'play a full game, user starts in a corner' do
     io("8\n6\n1\n5\n0\n3\n").start_game
-    expect(output).to include 'O'
-    expect(output).to include 'X'
+    expect(output).to include Game::O_MARKER
+    expect(output).to include Game::X_MARKER
     expect(output).to include 'Game over'
     expect(output).to include '===+===+==='
   end
     
   it 'play a full game, user starts in the center' do
     io("4\n8\n2\n6\n").start_game
-    expect(output).to include 'O'
-    expect(output).to include 'X'
+    expect(output).to include Game::O_MARKER
+    expect(output).to include Game::X_MARKER
     expect(output).to include 'Game over'
     expect(output).to include '===+===+==='
   end
