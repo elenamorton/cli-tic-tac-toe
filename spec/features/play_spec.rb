@@ -6,6 +6,8 @@ require 'stringio'
 # I'd like to be able to play tic-tac-toe game
 
 describe Game do
+  
+  let(:board_play) { Board.new(Game::BOARD_WIDTH) }
     
   def io(input='')
     incoming = StringIO.new(input)
@@ -43,29 +45,27 @@ describe Game do
   describe 'asking for the user move' do
     
     it 'move is inside the board and on unoccupied space' do
-      starting_board = "0".upto("8").to_a
-      hum = 'O'
+      marker = Game::HUMAN_MARKER
       spot = io('6').get_human_spot([2,6])
-      io.update_board(starting_board, spot)
-      io.display_board(starting_board)
+      io.update_board(board_play, marker, spot)
+      io.display_board(board_play.board)
       expect(output).to eq " 0 | 1 | 2 \n" \
                           "===+===+===\n" \
                           " 3 | 4 | 5 \n" \
                           "===+===+===\n" \
-                          " #{hum} | 7 | 8 \n"
+                          " #{marker} | 7 | 8 \n"
     end
     
     it 'move is inside the board and on an invalid spaces: 1, 3, and 8 ' do
-      starting_board = "0".upto("8").to_a
-      hum = 'O'
+      marker = Game::HUMAN_MARKER
       spot = io("1\n3\n\8\n6\n").get_human_spot([2,6])
-      io.update_board(starting_board, spot)
-      io.display_board(starting_board)
+      io.update_board(board_play, marker, spot)
+      io.display_board(board_play.board)
       expect(output).to eq " 0 | 1 | 2 \n" \
                           "===+===+===\n" \
                           " 3 | 4 | 5 \n" \
                           "===+===+===\n" \
-                          " #{hum} | 7 | 8 \n"
+                          " #{marker} | 7 | 8 \n"
     end
   end
 

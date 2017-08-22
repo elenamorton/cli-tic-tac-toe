@@ -1,12 +1,16 @@
+require_relative 'board'
+
 class Game
     
   attr_accessor :outgoing, :incoming
   
   HUMAN_MARKER = "O"
   COMPUTER_MARKER = "X"
+  BOARD_WIDTH = 3
     
   def initialize(outgoing, incoming)
-    @board = Board.new(3).board
+    @board_play = Board.new(BOARD_WIDTH)
+    @board = @board_play.board
     @com = COMPUTER_MARKER # the computer's marker
     @hum = HUMAN_MARKER # the user's marker
     
@@ -22,8 +26,9 @@ class Game
     
     # loop through until the game was won or tied
     until game_is_over(@board) || tie(@board)
+    
       move = get_human_spot(valid_moves)
-      update_board(@board, move)
+      @board= update_board(@board_play, @hum, move).board
       valid_moves.delete(move)
       
       if !game_is_over(@board) && !tie(@board)
@@ -39,8 +44,8 @@ class Game
     outgoing.puts board_stringify(board)
   end
   
-  def update_board(board, spot)
-    board[spot] = @hum
+  def update_board(board, marker, spot)
+    board.place_marker(marker, spot)
   end
     
   def get_human_spot(valid_spots)
@@ -128,8 +133,8 @@ class Game
   end
   
   def prompt(message)
-    outgoing.print message
-    outgoing.puts ': '
+    outgoing.print "#{message}: "
+   # outgoing.puts ': '
   end
 
   def board_stringify(board)
