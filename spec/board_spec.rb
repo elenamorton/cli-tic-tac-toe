@@ -2,16 +2,16 @@ require 'spec_helper'
 
 describe 'Board' do
   
-  GRID_WIDTH = 3
+ # GRID_WIDTH = 3
   
-  subject(:board) { Board.new(GRID_WIDTH) }
+  subject(:board) { Board.new(Board::GRID_WIDTH) }
     
   it 'expects to be initialized with size' do
-    expect(board.width).to eq GRID_WIDTH 
+    expect(board.width).to eq Board::GRID_WIDTH 
   end
   
   it 'expects number of spaces as square of grid size' do
-    expect(board.number_of_spots).to eq GRID_WIDTH * GRID_WIDTH
+    expect(board.number_of_spots).to eq Board::GRID_WIDTH**2
   end
   
   it 'expects number of spaces as square of grid size' do
