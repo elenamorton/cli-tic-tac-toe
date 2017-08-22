@@ -67,7 +67,7 @@ describe Game do
   end
     
   it 'play a full game, user starts in the center' do
-    io("4\n8\n2\n6\n").start_game
+    io("4\n8\n2\n6\n7\n5\n").start_game
     expect(output).to include Game::O_MARKER
     expect(output).to include Game::X_MARKER
     expect(output).to include 'Game over'
