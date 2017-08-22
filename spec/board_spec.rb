@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe 'Board' do
   
- # GRID_WIDTH = 3
-  
   subject(:board) { Board.new(Board::GRID_WIDTH) }
     
   it 'expects to be initialized with size' do
@@ -26,6 +24,14 @@ describe 'Board' do
   it 'updates board with a marker' do
     board.place_marker("X", 4)
     expect(board.content_of(4)).to eq "X"
+  end
+  
+  it 'stringifies an empty board with no markers' do
+    expect(board.board_stringify).to eq " 0 | 1 | 2 \n" \
+                          "===+===+===\n" \
+                          " 3 | 4 | 5 \n" \
+                          "===+===+===\n" \
+                          " 6 | 7 | 8 \n"
   end
     
 end

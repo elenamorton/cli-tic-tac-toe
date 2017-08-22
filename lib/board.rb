@@ -24,5 +24,13 @@ class Board
     @number_occupied_spots += 1
     self
   end
+  
+  
+  def board_stringify
+    @board.map { |val| val || ' ' }
+        .each_slice(3)
+        .map {|col1, col2, col3| " #{col1} | #{col2} | #{col3} \n" }
+        .join("===+===+===\n")
+  end
     
 end
