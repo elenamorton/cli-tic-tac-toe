@@ -54,8 +54,8 @@ class Game
     outgoing.puts board_play.board_stringify
   end
   
-  def update_board(board, marker, spot)
-    board.place_marker(marker, spot)
+  def update_board(board_play, marker, spot)
+    board_play.place_marker(marker, spot)
   end
     
   def get_human_spot(valid_spots)
@@ -67,12 +67,12 @@ class Game
     until spot
       if @board_play.content_of(4) == "4"
         spot = 4
-        @board= update_board(@board_play, @com, spot).board
+        update_board(@board_play, @com, spot)
         @scorer.calculate_score(spot, @com)
       else
         spot = get_best_move(@board, @com)
         if @board_play.content_of(spot) != @com && @board_play.content_of(spot) != @hum
-          @board= update_board(@board_play, @com, spot).board
+          update_board(@board_play, @com, spot)
           @scorer.calculate_score(spot, @com)
         else
           spot = nil
@@ -115,7 +115,7 @@ class Game
   end
 
   def game_is_over?
-    @scorer.win? || tie?(@board)
+    @scorer.win? || @board_play.tie?
   end
 
   
@@ -135,10 +135,6 @@ class Game
   
   def prompt(message)
     outgoing.print "#{message}: "
-  end
-  
-  def tie?(board)
-    board.all? { |spot| spot == @com || spot == @hum }
   end
   
   
