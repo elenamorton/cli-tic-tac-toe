@@ -32,5 +32,9 @@ class Board
         .map {|col1, col2, col3| " #{col1} | #{col2} | #{col3} \n" }
         .join("===+===+===\n")
   end
+  
+  def tie?
+    @number_occupied_spots == @width**2
+  end
     
 end
