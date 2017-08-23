@@ -1,23 +1,27 @@
 require_relative 'board'
+require_relative 'scorer'
 
 class Game
     
-  attr_accessor :outgoing, :incoming, :score_table
+  attr_accessor :outgoing, :incoming
   
   O_MARKER = "O"
   X_MARKER = "X"
-  SCORE_VALUE = 1
-  SCORE_DEFAULT = { X_MARKER.to_sym => SCORE_VALUE, O_MARKER.to_sym => -SCORE_VALUE }
 
   BOARD_WIDTH = 3
     
   def initialize(outgoing=$stdout, incoming=$stdin)
-    @board_play = Board.new(BOARD_WIDTH)
+    @width ||= BOARD_WIDTH
+    
+    @board_play = Board.new(@width)
     @board = @board_play.board
+    
+    @scorer = Scorer.new({:width => @width, :x_marker => X_MARKER, :o_marker => O_MARKER})
+    @score_table = @scorer.score_table
+      
     @com = X_MARKER # the computer's marker
     @hum = O_MARKER # the user's marker
-    @score_table = default_score_table
-
+    
     self.outgoing = outgoing
     self.incoming = incoming
   
@@ -32,8 +36,8 @@ class Game
     until game_is_over?
     
       move = get_human_spot(valid_moves)
-      @board= update_board(@board_play, @hum, move).board
-      calculate_score(move, @hum)
+      @board = update_board(@board_play, @hum, move).board
+      @scorer.calculate_score(move, @hum)
       valid_moves.delete(move)
       
       if !game_is_over?
@@ -64,12 +68,12 @@ class Game
       if @board_play.content_of(4) == "4"
         spot = 4
         @board= update_board(@board_play, @com, spot).board
-        calculate_score(spot, @com)
+        @scorer.calculate_score(spot, @com)
       else
         spot = get_best_move(@board, @com)
-        if @board_play.content_of(spot) != X_MARKER && @board_play.content_of(spot) != O_MARKER
+        if @board_play.content_of(spot) != @com && @board_play.content_of(spot) != @hum
           @board= update_board(@board_play, @com, spot).board
-          calculate_score(spot, @com)
+          @scorer.calculate_score(spot, @com)
         else
           spot = nil
         end
@@ -111,19 +115,9 @@ class Game
   end
 
   def game_is_over?
-    win?(@score_table) || tie?(@board)
+    @scorer.win? || tie?(@board)
   end
 
-  def calculate_score(spot, marker)
-    row = spot / BOARD_WIDTH
-    col = spot % BOARD_WIDTH
-    @score_table[:D] += SCORE_DEFAULT[marker.to_sym] if row == col
-    @score_table[:antiD] += SCORE_DEFAULT[marker.to_sym] if (row + col) == BOARD_WIDTH - 1
-    @score_table[("R" + row.to_s).to_sym] += SCORE_DEFAULT[marker.to_sym]
-    @score_table[("C" + col.to_s).to_sym] += SCORE_DEFAULT[marker.to_sym]
-    @score_table
-  end
-  
   
   private
   
@@ -147,22 +141,6 @@ class Game
     board.all? { |spot| spot == @com || spot == @hum }
   end
   
-  def win?(score_table)
-    score_table.has_value?(BOARD_WIDTH) || score_table.has_value?(-BOARD_WIDTH)
-  end
-
-  def default_score_table
-    @score_table = Hash.new(0)
-    @score_table.store(:D, 0)
-    @score_table.store(:antiD, 0)
-    BOARD_WIDTH.times do |row|
-      @score_table.store(("R" + row.to_s).to_sym, 0)
-    end
-    BOARD_WIDTH.times do |col|
-      @score_table.store(("C" + col.to_s).to_sym, 0)
-    end
-    @score_table
-  end
   
 end
 
