@@ -6,7 +6,8 @@ class Game
   
   O_MARKER = "O"
   X_MARKER = "X"
-  SCORE_DEFAULT = { X_MARKER.to_sym => 1, O_MARKER.to_sym => -1 }
+  SCORE_VALUE = 1
+  SCORE_DEFAULT = { X_MARKER.to_sym => SCORE_VALUE, O_MARKER.to_sym => -SCORE_VALUE }
 
   BOARD_WIDTH = 3
     
@@ -28,13 +29,14 @@ class Game
     valid_moves = @board.map{ |move| move.to_i}
     
     # loop through until the game was won or tied
-    until game_is_over?(@board) || tie(@board)
+    until game_is_over?
     
       move = get_human_spot(valid_moves)
       @board= update_board(@board_play, @hum, move).board
+      calculate_score(move, @hum)
       valid_moves.delete(move)
       
-      if !game_is_over?(@board) && !tie(@board)
+      if !game_is_over?
         eval_board
       end
       
@@ -62,10 +64,12 @@ class Game
       if @board_play.content_of(4) == "4"
         spot = 4
         @board= update_board(@board_play, @com, spot).board
+        calculate_score(spot, @com)
       else
         spot = get_best_move(@board, @com)
         if @board_play.content_of(spot) != X_MARKER && @board_play.content_of(spot) != O_MARKER
           @board= update_board(@board_play, @com, spot).board
+          calculate_score(spot, @com)
         else
           spot = nil
         end
@@ -83,13 +87,13 @@ class Game
     end
     available_spaces.each do |as|
       board[as.to_i] = @com
-      if game_is_over?(board)
+      if game_is_over?
         best_move = as.to_i
         board[as.to_i] = as
         return best_move
       else
         board[as.to_i] = @hum
-        if game_is_over?(board)
+        if game_is_over?
           best_move = as.to_i
           board[as.to_i] = as
           return best_move
@@ -106,8 +110,8 @@ class Game
     end
   end
 
-  def game_is_over?(b)
-    @score_table.has_value?(BOARD_WIDTH) || @score_table.has_value?(-BOARD_WIDTH)
+  def game_is_over?
+    win?(@score_table) || tie?(@board)
   end
 
   def calculate_score(spot, marker)
@@ -115,8 +119,8 @@ class Game
     col = spot % BOARD_WIDTH
     @score_table[:D] += SCORE_DEFAULT[marker.to_sym] if row == col
     @score_table[:antiD] += SCORE_DEFAULT[marker.to_sym] if (row + col) == BOARD_WIDTH - 1
-    @score_table[("R" + row.to_s).to_sym] = row
-    @score_table[("C" + col.to_s).to_sym] = col
+    @score_table[("R" + row.to_s).to_sym] += SCORE_DEFAULT[marker.to_sym]
+    @score_table[("C" + col.to_s).to_sym] += SCORE_DEFAULT[marker.to_sym]
     @score_table
   end
   
@@ -139,8 +143,12 @@ class Game
     outgoing.print "#{message}: "
   end
   
-  def tie(b)
-    b.all? { |s| s == X_MARKER || s == O_MARKER }
+  def tie?(board)
+    board.all? { |spot| spot == @com || spot == @hum }
+  end
+  
+  def win?(score_table)
+    score_table.has_value?(BOARD_WIDTH) || score_table.has_value?(-BOARD_WIDTH)
   end
 
   def default_score_table
