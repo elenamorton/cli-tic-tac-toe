@@ -30,15 +30,15 @@ class Game
   def start_game
     # start by printing the board
     display_board(@board_play)
-    valid_moves = @board.map{ |move| move.to_i}
+    _valid_moves = @board.map{ |move| move.to_i}
     
     # loop through until the game was won or tied
     until game_is_over?
     
-      move = get_human_spot(valid_moves)
+      move = get_human_spot(_valid_moves)
       @board = update_board(@board_play, @hum, move).board
       @scorer.calculate_score(move, @hum)
-      valid_moves.delete(move)
+      _valid_moves.delete(move)
       
       if !game_is_over?
         eval_board
