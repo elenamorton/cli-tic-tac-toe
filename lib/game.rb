@@ -12,9 +12,10 @@ class Game
     
   def initialize(outgoing=$stdout, incoming=$stdin)
     @width ||= BOARD_WIDTH
-    
+    @center = @width + @width / 2
     @board_play = Board.new(@width)
     @board = @board_play.board
+    @valid_moves = @board.map{ |move| move.to_i}
     
     @scorer = Scorer.new({:width => @width, :x_marker => X_MARKER, :o_marker => O_MARKER})
     @score_table = @scorer.score_table
@@ -30,15 +31,14 @@ class Game
   def start_game
     # start by printing the board
     display_board(@board_play)
-    _valid_moves = @board.map{ |move| move.to_i}
     
     # loop through until the game was won or tied
     until game_is_over?
     
-      move = get_human_spot(_valid_moves)
+      move = get_human_spot(@valid_moves)
       @board = update_board(@board_play, @hum, move).board
       @scorer.calculate_score(move, @hum)
-      _valid_moves.delete(move)
+      @valid_moves.delete(move)
       
       if !game_is_over?
         eval_board
@@ -63,29 +63,22 @@ class Game
   end
   
   def eval_board
-    spot = nil
-    until spot
-      if @board_play.content_of(4) == "4"
-        spot = 4
+    if @board_play.content_of(@center) == @center.to_s
+        spot = @center
         update_board(@board_play, @com, spot)
         @scorer.calculate_score(spot, @com)
-      else
-        spot = get_best_move(@board, @com)
-        if @board_play.content_of(spot) != @com && @board_play.content_of(spot) != @hum
-          update_board(@board_play, @com, spot)
-          @scorer.calculate_score(spot, @com)
-        else
-          spot = nil
-        end
-      end
+        return
     end
+    spot = get_best_move(@board, @com)
+    update_board(@board_play, @com, spot)
+    @scorer.calculate_score(spot, @com)
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
     available_spaces = []
     best_move = nil
     board.each do |s|
-      if s != X_MARKER && s != O_MARKER
+      if s != @com && s != @hum
         available_spaces << s
       end
     end
@@ -109,8 +102,8 @@ class Game
     if best_move
       return best_move
     else
-      n = rand(0..available_spaces.count)
-      return available_spaces[n].to_i
+      n = available_spaces.sample
+      return n.to_i
     end
   end
 
