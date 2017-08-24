@@ -36,12 +36,15 @@ class Game
     until game_is_over?
     
       move = get_human_spot(@valid_moves)
-      @board = update_board(@board_play, @hum, move).board
+      update_board(@board_play, @hum, move)
       @scorer.calculate_score(move, @hum)
       @valid_moves.delete(move)
       
       if !game_is_over?
-        eval_board
+        move = eval_board
+        update_board(@board_play, @com, move)
+        @scorer.calculate_score(move, @com)
+        @valid_moves.delete(move)
       end
       
       display_board(@board_play)
@@ -68,9 +71,7 @@ class Game
     else
       spot = get_best_move(@board, @com)
     end
-    update_board(@board_play, @com, spot)
-    @scorer.calculate_score(spot, @com)
-    @valid_moves.delete(spot)
+    return spot
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
