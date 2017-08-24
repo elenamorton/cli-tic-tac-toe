@@ -15,14 +15,14 @@ class Scorer
     @score_table = default_score_table
   end
   
-  def calculate_score(spot, marker)
+  def calculate_score(score_table=@score_table, spot, marker)
     row = spot / @width
     col = spot % @width
-    @score_table[:D] += @score_default[marker.to_sym] if row == col
-    @score_table[:antiD] += @score_default[marker.to_sym] if (row + col) == @width - 1
-    @score_table[("R" + row.to_s).to_sym] += @score_default[marker.to_sym]
-    @score_table[("C" + col.to_s).to_sym] += @score_default[marker.to_sym]
-    @score_table
+    score_table[:D] += @score_default[marker.to_sym] if row == col
+    score_table[:antiD] += @score_default[marker.to_sym] if (row + col) == @width - 1
+    score_table[("R" + row.to_s).to_sym] += @score_default[marker.to_sym]
+    score_table[("C" + col.to_s).to_sym] += @score_default[marker.to_sym]
+    score_table
   end
   
   def win?
