@@ -34,31 +34,21 @@ class Game
     
     # loop through until the game was won or tied
     until game_is_over?
-    
       move = get_human_spot(@valid_moves)
-      update_board(@board_play, @hum, move)
-      @scorer.calculate_score(move, @hum)
-      @valid_moves.delete(move)
+      post_move_updates(@hum, move)
       
       if !game_is_over?
         move = eval_board
-        update_board(@board_play, @com, move)
-        @scorer.calculate_score(move, @com)
-        @valid_moves.delete(move)
+        post_move_updates(@com, move)
       end
       
       display_board(@board_play)
     end
-    
     outgoing.puts "Game over"
   end
 
   def display_board(board_play)
     outgoing.puts board_play.board_stringify
-  end
-  
-  def update_board(board_play, marker, spot)
-    board_play.place_marker(marker, spot)
   end
     
   def get_human_spot(valid_spots)
@@ -71,7 +61,7 @@ class Game
     else
       spot = get_best_move(@board, @com)
     end
-    return spot
+    spot
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
@@ -121,6 +111,12 @@ class Game
   
   def prompt(message)
     outgoing.print "#{message}: "
+  end
+  
+  def post_move_updates(marker, spot)
+    @board_play.place_marker(marker, spot)
+    @scorer.calculate_score(spot, marker)
+    @valid_moves.delete(spot)
   end
   
 end
