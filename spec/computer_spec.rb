@@ -14,4 +14,12 @@ describe 'Computer' do
     expect(computer.name).to eq :computer
   end
   
+  describe 'gets computer move for various depth values' do
+    
+    it 'get next move for default center spot' do
+      expect(computer.get_next_move([0,1,2,3,4,5,6,7,8])).to eq 4
+    end
+  
+  end
+  
 end
