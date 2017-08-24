@@ -65,45 +65,37 @@ class Game
   def eval_board
     if @board_play.content_of(@center) == @center.to_s
         spot = @center
-        update_board(@board_play, @com, spot)
-        @scorer.calculate_score(spot, @com)
-        return
+    else
+      spot = get_best_move(@board, @com)
     end
-    spot = get_best_move(@board, @com)
     update_board(@board_play, @com, spot)
     @scorer.calculate_score(spot, @com)
+    @valid_moves.delete(spot)
   end
 
   def get_best_move(board, next_player, depth = 0, best_score = {})
-    available_spaces = []
     best_move = nil
-    board.each do |s|
-      if s != @com && s != @hum
-        available_spaces << s
-      end
-    end
-    available_spaces.each do |as|
-      board[as.to_i] = @com
+    @valid_moves.each do |as|
+      board[as] = @com
       if game_is_over?
-        best_move = as.to_i
-        board[as.to_i] = as
+        best_move = as
+        board[as] = as
         return best_move
       else
-        board[as.to_i] = @hum
+        board[as] = @hum
         if game_is_over?
-          best_move = as.to_i
-          board[as.to_i] = as
+          best_move = as
+          board[as] = as
           return best_move
         else
-          board[as.to_i] = as
+          board[as] = as
         end
       end
     end
     if best_move
       return best_move
     else
-      n = available_spaces.sample
-      return n.to_i
+      return @valid_moves.sample
     end
   end
 
@@ -129,7 +121,6 @@ class Game
   def prompt(message)
     outgoing.print "#{message}: "
   end
-  
   
 end
 
