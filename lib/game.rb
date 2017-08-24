@@ -1,5 +1,6 @@
 require_relative 'board'
 require_relative 'scorer'
+require_relative 'computer'
 
 class Game
     
@@ -19,7 +20,9 @@ class Game
     
     @scorer = Scorer.new({:width => @width, :x_marker => X_MARKER, :o_marker => O_MARKER})
     @score_table = @scorer.score_table
-      
+    
+    @players = []
+    @computer = Computer.new({:width => @width, :marker => X_MARKER, :scorer => @scorer, :depth => 0})
     @com = X_MARKER # the computer's marker
     @hum = O_MARKER # the user's marker
     
@@ -38,7 +41,7 @@ class Game
       post_move_updates(@hum, move)
       
       if !game_is_over?
-        move = eval_board
+        move = @computer.get_next_move(@valid_moves)
         post_move_updates(@com, move)
       end
       
@@ -55,41 +58,6 @@ class Game
     get_input("Enter your move", /\A[#{valid_spots.join('')}]\z/).to_i
   end
   
-  def eval_board
-    if @board_play.content_of(@center) == @center.to_s
-        spot = @center
-    else
-      spot = get_best_move(@board, @com)
-    end
-    spot
-  end
-
-  def get_best_move(board, next_player, depth = 0, best_score = {})
-    best_move = nil
-    @valid_moves.each do |as|
-      board[as] = @com
-      if game_is_over?
-        best_move = as
-        board[as] = as
-        return best_move
-      else
-        board[as] = @hum
-        if game_is_over?
-          best_move = as
-          board[as] = as
-          return best_move
-        else
-          board[as] = as
-        end
-      end
-    end
-    if best_move
-      return best_move
-    else
-      return @valid_moves.sample
-    end
-  end
-
   def game_is_over?
     @scorer.win? || @board_play.tie?
   end
