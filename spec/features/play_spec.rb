@@ -37,7 +37,8 @@ describe Game do
     it 'inside the board and on unoccupied space' do
       marker = Game::O_MARKER
       spot = io('6').get_human_spot([2,6])
-      io.update_board(board_play, marker, spot)
+      #io.update_board(board_play, marker, spot)
+      board_play.place_marker(marker, spot)
       io.display_board(board_play)
       expect(output).to eq " 0 | 1 | 2 \n" \
                           "===+===+===\n" \
@@ -49,7 +50,7 @@ describe Game do
     it 'inside the board and on an valid spaces: 1, 3, and 8 ' do
       marker = Game::O_MARKER
       spot = io("1\n3\n8\n6\n").get_human_spot([2,6])
-      io.update_board(board_play, marker, spot)
+      board_play.place_marker(marker, spot)
       io.display_board(board_play)
       expect(output).to eq " 0 | 1 | 2 \n" \
                           "===+===+===\n" \
@@ -61,7 +62,7 @@ describe Game do
     it 'inside the board and on an invalid space' do
       marker = Game::O_MARKER
       spot = io("6\n").get_human_spot([6])
-      io.update_board(board_play, marker, spot)
+      board_play.place_marker(marker, spot)
       io.display_board(board_play)
       expect(output).to eq " 0 | 1 | 2 \n" \
                           "===+===+===\n" \
