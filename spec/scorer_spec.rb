@@ -12,7 +12,7 @@ describe 'Scorer' do
       expect(scorer.win?).to be false
     end
   
-    it 'calculates score for "O" wins and "X" loses game ' do
+    it 'calculates score for "O" wins and "X" loses game, gets win? true ' do
       scorer.calculate_score(4, parameters[:o_marker])
       scorer.calculate_score(0, parameters[:x_marker])
       scorer.calculate_score(2, parameters[:o_marker])
@@ -23,7 +23,7 @@ describe 'Scorer' do
       expect(scorer.win?).to be true
     end
     
-    it 'calculates score for a tie game' do
+    it 'calculates score for a tie game, gets win? false' do
       scorer.calculate_score(1, parameters[:o_marker])
       scorer.calculate_score(4, parameters[:x_marker])
       scorer.calculate_score(2, parameters[:o_marker])
