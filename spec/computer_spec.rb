@@ -1,4 +1,5 @@
 require 'spec_helper'
+require File.join(File.dirname(__FILE__), '../lib/', 'computer.rb')
 
 describe 'Computer' do
   
