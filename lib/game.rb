@@ -1,10 +1,12 @@
 require_relative 'board'
 require_relative 'scorer'
 require_relative 'computer'
+require_relative 'human'
+require_relative 'iolike'
 
 class Game
     
-  attr_accessor :outgoing, :incoming
+  attr_accessor :outgoing, :incoming, :human
   
   O_MARKER = "O"
   X_MARKER = "X"
@@ -13,7 +15,6 @@ class Game
     
   def initialize(outgoing=$stdout, incoming=$stdin)
     @width ||= BOARD_WIDTH
-    @center = @width + @width / 2
     @board_play = Board.new(@width)
     @board = @board_play.board
     @valid_moves = @board.map{ |move| move.to_i}
@@ -23,26 +24,29 @@ class Game
     
     @players = []
     @computer = Computer.new({:width => @width, :marker => X_MARKER, :scorer => @scorer, :depth => 0})
+    @human = Human.new(outgoing, incoming, {:width => @width, :marker => O_MARKER, :scorer => @scorer})
+    
     @com = X_MARKER # the computer's marker
     @hum = O_MARKER # the user's marker
     
     self.outgoing = outgoing
     self.incoming = incoming
-  
   end
 
+  include Iolike
+  
   def start_game
     # start by printing the board
     display_board(@board_play)
     
     # loop through until the game was won or tied
     until game_is_over?
-      move = get_human_spot(@valid_moves)
-      post_move_updates(@hum, move)
+      move = @human.get_next_move(@valid_moves)
+      post_move_updates(@human.marker, move)
       
       if !game_is_over?
         move = @computer.get_next_move(@valid_moves)
-        post_move_updates(@com, move)
+        post_move_updates(@computer.marker, move)
       end
       
       display_board(@board_play)
@@ -53,10 +57,6 @@ class Game
   def display_board(board_play)
     outgoing.puts board_play.board_stringify
   end
-    
-  def get_human_spot(valid_spots)
-    get_input("Enter your move", /\A[#{valid_spots.join('')}]\z/).to_i
-  end
   
   def game_is_over?
     @scorer.win? || @board_play.tie?
@@ -64,22 +64,6 @@ class Game
 
   
   private
-  
-  def get_input(message_prompt, validation)
-    prompt message_prompt
-    input = incoming.gets.chomp
-    return input if input =~ validation
-    invalid_data input
-    get_input(message_prompt, validation)
-  end
-  
-  def invalid_data(data)
-    outgoing.puts "You've entered #{data}, which is invalid"
-  end
-  
-  def prompt(message)
-    outgoing.print "#{message}: "
-  end
   
   def post_move_updates(marker, spot)
     @board_play.place_marker(marker, spot)
@@ -89,5 +73,5 @@ class Game
   
 end
 
-#game = Game.new($stdout, $stdin)
+#game = Game.new
 #game.start_game
