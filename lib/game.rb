@@ -63,10 +63,14 @@ class Game
     @scorer.win? || @board_play.tie?
   end
   
-  def choose_players
+  def user_choose_players
     @players << get_input("Please, choose first player (human|computer)", /\Ahuman|computer\z/).to_sym
     @players << get_input("Please, choose second player (human|computer)", /\Ahuman|computer\z/).to_sym
-
+  end
+    
+  def create_players
+    @players[0] = create_player(player_1, O_MARKER)
+    @players[1] = create_player(player_2, X_MARKER)
   end
 
   def swap_players
@@ -80,6 +84,8 @@ class Game
     @scorer.calculate_score(spot, marker)
     @valid_moves.delete(spot)
   end
+  
+
   
   def player_1
     @players.first
