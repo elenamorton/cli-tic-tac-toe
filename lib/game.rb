@@ -23,13 +23,9 @@ class Game
     @scorer = Scorer.new({:width => @width, :x_marker => X_MARKER, :o_marker => O_MARKER})
     @score_table = @scorer.score_table
 
-    @computer = Computer.new({:width => @width, :marker => X_MARKER, :scorer => @scorer, :depth => 0})
-    @human = Human.new(outgoing, incoming, {:width => @width, :marker => O_MARKER, :scorer => @scorer})
-        
-    @players = [@human, @computer]
-
-    @current_player = player_1
-    @opposing_player = player_2
+    @players = []
+    @current_player = nil
+    @opposing_player = nil
     
     self.outgoing = outgoing
     self.incoming = incoming
@@ -89,7 +85,12 @@ class Game
       return Computer.new({:width => @width, :marker => marker, :scorer => @scorer, :depth => 0})
     end
   end
-
+  
+  def setup_players
+    @current_player = player_1
+    @opposing_player = player_2
+  end
+  
   def swap_players
     @current_player, @opposing_player = @opposing_player, @current_player
   end
