@@ -74,8 +74,8 @@ class Game
   end
   
   def user_choose_players
-    @players << get_input("Please, choose first player (human|computer)", /\Ahuman|computer\z/).to_sym
-    @players << get_input("Please, choose second player (human|computer)", /\Ahuman|computer\z/).to_sym
+    @players << get_input("Please, choose a player (human|computer)", /\Ahuman|computer\z/).to_sym
+    @players << get_input("Please, choose another player (human|computer)", /\Ahuman|computer\z/).to_sym
   end
     
   def create_players
