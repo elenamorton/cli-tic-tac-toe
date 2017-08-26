@@ -22,12 +22,12 @@ describe Game do
     @outgoing = StringIO.new
     described_class.new(@outgoing, incoming)
   end
-    
+
   def output
     @outgoing.string
   end
   
-  let(:human) { Human.new({:width => Game::BOARD_WIDTH, :o_marker => Game::O_MARKER, :scorer => scorer, :outgoing => io.outgoing, :incoming => io.incoming }) }
+  let(:human) { Human.new({:width => Game::BOARD_WIDTH, :marker => Game::O_MARKER, :scorer => scorer, :outgoing => io.outgoing, :incoming => io.incoming }) }
     
   describe '#display_board' do
   
