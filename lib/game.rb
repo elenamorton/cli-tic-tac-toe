@@ -6,8 +6,8 @@ require_relative 'iolike'
 
 class Game
     
-  attr_accessor :outgoing, :incoming, :current_player
-  attr_reader :human, :players
+  attr_accessor :outgoing, :incoming, :current_player, :players
+  attr_reader :human
   
   O_MARKER = "O"
   X_MARKER = "X"
@@ -38,18 +38,19 @@ class Game
   include Iolike
   
   def start_game
+    
+    choose_players
+    
     # start by printing the board
     display_board(@board_play)
     
     # loop through until the game was won or tied
     until game_is_over?
-    
       move = @current_player.get_next_move(@valid_moves)
       post_move_updates(@current_player.marker, move)
       
       display_board(@board_play)
-      swap_players(@current_player, @opposing_player) if !game_is_over?
-
+      swap_players if !game_is_over?
     end
     outgoing.puts "Game over"
   end
@@ -61,10 +62,15 @@ class Game
   def game_is_over?
     @scorer.win? || @board_play.tie?
   end
+  
+  def choose_players
+    @players << get_input("Please, choose first player (human|computer)", /\Ahuman|computer\z/).to_sym
+    @players << get_input("Please, choose second player (human|computer)", /\Ahuman|computer\z/).to_sym
 
-  def swap_players(current, opposing)
-    current, opposing = opposing, current
-    current
+  end
+
+  def swap_players
+    @current_player, @opposing_player = @opposing_player, @current_player
   end
   
   private
