@@ -26,9 +26,6 @@ class Game
     @computer = Computer.new({:width => @width, :marker => X_MARKER, :scorer => @scorer, :depth => 0})
     @human = Human.new(outgoing, incoming, {:width => @width, :marker => O_MARKER, :scorer => @scorer})
     
-    @com = X_MARKER # the computer's marker
-    @hum = O_MARKER # the user's marker
-    
     self.outgoing = outgoing
     self.incoming = incoming
   end
