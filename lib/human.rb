@@ -15,8 +15,7 @@ class Human
     @incoming = incoming
 
   end
-  
-  
+
   def get_next_move(valid_spots)
     get_input("Enter your move", /\A[#{valid_spots.join('')}]\z/).to_i
   end
