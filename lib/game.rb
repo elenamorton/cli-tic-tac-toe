@@ -80,6 +80,15 @@ class Game
     @players[0] = create_player(player_1, O_MARKER)
     @players[1] = create_player(player_2, X_MARKER)
   end
+  
+  def create_player(player, marker)
+    case player
+    when :human
+      return Human.new(outgoing, incoming, {:width => @width, :marker => marker, :scorer => @scorer})
+    when :computer
+      return Computer.new({:width => @width, :marker => marker, :scorer => @scorer, :depth => 0})
+    end
+  end
 
   def swap_players
     @current_player, @opposing_player = @opposing_player, @current_player
