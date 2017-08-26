@@ -27,7 +27,6 @@ describe 'Human' do
   end
   
   it 'returns a number as input' do
-    #allow($stdin).to receive(:gets).and_return('2\n')
     move = humanio('2').get_next_move([0,2,3,4])
     expect(move).to eq 2
   end
