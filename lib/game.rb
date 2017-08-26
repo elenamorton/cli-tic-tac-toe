@@ -63,6 +63,14 @@ class Game
     @scorer.win? || @board_play.tie?
   end
   
+  private
+  
+  def post_move_updates(marker, spot)
+    @board_play.place_marker(marker, spot)
+    @scorer.calculate_score(spot, marker)
+    @valid_moves.delete(spot)
+  end
+  
   def user_choose_players
     @players << get_input("Please, choose first player (human|computer)", /\Ahuman|computer\z/).to_sym
     @players << get_input("Please, choose second player (human|computer)", /\Ahuman|computer\z/).to_sym
@@ -76,16 +84,6 @@ class Game
   def swap_players
     @current_player, @opposing_player = @opposing_player, @current_player
   end
-  
-  private
-  
-  def post_move_updates(marker, spot)
-    @board_play.place_marker(marker, spot)
-    @scorer.calculate_score(spot, marker)
-    @valid_moves.delete(spot)
-  end
-  
-
   
   def player_1
     @players.first
