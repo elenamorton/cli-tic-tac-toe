@@ -21,17 +21,17 @@ describe 'Game unit tests' do
   describe '#choose players' do
   
     it 'user chooses both players as Human' do
-      io("human\nhuman\n").user_setup_game
+      io("human\nhuman\no\nx\n1\n").user_setup_game
       expect(output).to include 'human'
     end
   
     it 'user chooses both players as Computer' do
-      io("computer\ncomputer\n").user_setup_game
+      io("computer\ncomputer\no\nx\n2\n").user_setup_game
       expect(output).to include 'computer'
     end
     
     it 'user chooses both players as Computer' do
-      io("human\ncomputer\n").user_setup_game
+      io("human\ncomputer\no\nx\n2\n").user_setup_game
       expect(output).to include 'human'
       expect(output).to include 'computer'
     end
