@@ -93,8 +93,9 @@ class Game
   end
   
   def setup_players
-    @current_player = player_1
-    @opposing_player = player_2
+    player = get_input("Please, choose which players goes first (1|2)", /\A1|2\z/)
+    @current_player, @opposing_player = player_1, player_2 if player == '1'
+    @current_player, @opposing_player = player_2, player_1 if player == '2'
   end
   
   def swap_players
