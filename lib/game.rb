@@ -6,7 +6,8 @@ require_relative 'iolike'
 
 class Game
     
-  attr_accessor :outgoing, :incoming, :human
+  attr_accessor :outgoing, :incoming, :current_player
+  attr_reader :human, :players
   
   O_MARKER = "O"
   X_MARKER = "X"
@@ -21,10 +22,14 @@ class Game
     
     @scorer = Scorer.new({:width => @width, :x_marker => X_MARKER, :o_marker => O_MARKER})
     @score_table = @scorer.score_table
-    
-    @players = []
+
     @computer = Computer.new({:width => @width, :marker => X_MARKER, :scorer => @scorer, :depth => 0})
     @human = Human.new(outgoing, incoming, {:width => @width, :marker => O_MARKER, :scorer => @scorer})
+        
+    @players = [@human, @computer]
+
+    @current_player = player_1
+    @opposing_player = player_2
     
     self.outgoing = outgoing
     self.incoming = incoming
@@ -38,15 +43,13 @@ class Game
     
     # loop through until the game was won or tied
     until game_is_over?
-      move = @human.get_next_move(@valid_moves)
-      post_move_updates(@human.marker, move)
-      
-      if !game_is_over?
-        move = @computer.get_next_move(@valid_moves)
-        post_move_updates(@computer.marker, move)
-      end
+    
+      move = @current_player.get_next_move(@valid_moves)
+      post_move_updates(@current_player.marker, move)
       
       display_board(@board_play)
+      swap_players(@current_player, @opposing_player) if !game_is_over?
+
     end
     outgoing.puts "Game over"
   end
@@ -59,6 +62,10 @@ class Game
     @scorer.win? || @board_play.tie?
   end
 
+  def swap_players(current, opposing)
+    current, opposing = opposing, current
+    current
+  end
   
   private
   
@@ -66,6 +73,14 @@ class Game
     @board_play.place_marker(marker, spot)
     @scorer.calculate_score(spot, marker)
     @valid_moves.delete(spot)
+  end
+  
+  def player_1
+    players.first
+  end
+  
+  def player_2
+    players.last
   end
   
 end
