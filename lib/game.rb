@@ -27,6 +27,8 @@ class Game
     @current_player = nil
     @opposing_player = nil
     
+    @markers = []
+    
     self.outgoing = outgoing
     self.incoming = incoming
   end
@@ -63,6 +65,7 @@ class Game
   
   def user_setup_game
     user_choose_players
+    user_choose_marker_symbols
     create_players
     setup_players
   end
@@ -77,10 +80,15 @@ class Game
     @players << get_input("Please, choose a player (human|computer)", /\Ahuman|computer\z/).to_sym
     @players << get_input("Please, choose another player (human|computer)", /\Ahuman|computer\z/).to_sym
   end
+  
+  def user_choose_marker_symbols
+    @markers << get_input("Please, choose a player symbol (X|other letter)", /^([a-z]{1})/i).upcase
+    @markers << get_input("Please, choose the other player symbol (O|other letter)", /^([a-z]{1})/i).upcase
+  end
     
   def create_players
-    @players[0] = create_player(player_1, O_MARKER)
-    @players[1] = create_player(player_2, X_MARKER)
+    @players[0] = create_player(player_1, @markers.first)
+    @players[1] = create_player(player_2, @markers.last)
   end
   
   def create_player(player, marker)
