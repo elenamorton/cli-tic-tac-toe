@@ -82,11 +82,11 @@ class Game
   end
   
   def player_1
-    players.first
+    @players.first
   end
   
   def player_2
-    players.last
+    @players.last
   end
   
 end
