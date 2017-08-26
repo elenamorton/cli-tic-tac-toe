@@ -4,7 +4,6 @@ require File.join(File.dirname(__FILE__), '../lib/', 'scorer.rb')
 
 describe 'Human' do
   
-  #subject(:human) { Human.new(parameters) }
   let(:scorer) { Scorer.new({:width => 3, :x_marker => 'X', :o_marker => 'O'}) }
   let(:parameters) { { :marker => 'O', :width => 3, :scorer => scorer} }
 
