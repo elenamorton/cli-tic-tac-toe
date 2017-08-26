@@ -35,7 +35,7 @@ class Game
   
   def start_game
     
-    choose_players
+    user_setup_game
     
     # start by printing the board
     display_board(@board_play)
@@ -60,6 +60,12 @@ class Game
   end
   
   private
+  
+  def user_setup_game
+    user_choose_players
+    create_players
+    setup_players
+  end
   
   def post_move_updates(marker, spot)
     @board_play.place_marker(marker, spot)
