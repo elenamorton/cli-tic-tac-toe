@@ -30,4 +30,9 @@ describe 'Human' do
     expect(move).to eq 2
   end
   
+  it 'human chooses a move on an invalid space' do
+    move = humanio("2\n4\n").get_next_move([0,3,4])
+    expect(output).to include "You've entered 2, which is invalid\n"
+  end
+  
 end
