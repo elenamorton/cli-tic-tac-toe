@@ -12,11 +12,13 @@ $ bundle install
 ```shell
 $ rspec
 ```
-* start up the CLI application
-Change first the ./lib/game.rb file to uncomment the last two lines in this file:
+- Start up the CLI application
+  - Change first the ./lib/game.rb file to uncomment the last two lines in this file
+```shell
 game = Game.new
 game.start_game
-Save the file and run the command below
+```
+  - Save the file and run the command below
 ```shell
 $ ruby ./lib/game.rb
 ```
@@ -28,7 +30,7 @@ $ ruby ./lib/game.rb
 ## Specification
 ### User Stories
 
-```
+```shell
 
 ```
 
