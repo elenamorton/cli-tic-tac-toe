@@ -1,13 +1,32 @@
 # Tic Tac Toe Game - console (CLI) version
 
 
-## Instructions
+## Usage Instructions
+* clone the repo and install the Ruby gems
+```shell
+$ git clone https://github.com/elenamorton/cli-tic-tac-toe.git
+$ cd cli-tic-tac-toe
+$ bundle install
+```
+* run tests
+```shell
+$ rspec
+```
+* start up the CLI application
+Change first the ./lib/game.rb file to uncomment the last two lines in this file:
+game = Game.new
+game.start_game
+Save the file and run the command below
+```shell
+$ ruby ./lib/game.rb
+```
+### Used Technologies
+* ruby 2.3.4p301
+* rspec (3.6.0)
+* simplecov (0.15.0)
 
-## Used Technologies
-* Ruby
-* RSpec
-
-## User Stories
+## Specification
+### User Stories
 
 ```
 
@@ -15,4 +34,7 @@
 
 
 
-## Requirements
+### Requirements
+
+
+### Acceptance criteria
