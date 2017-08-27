@@ -13,7 +13,7 @@ describe 'Board' do
     expect(board.number_of_spots).to eq Board::GRID_WIDTH**2
   end
   
-  it 'expects fir grid 4 number of spaces as 16' do
+  it 'expects for grid 4 number of spaces as 16' do
     board_four = Board.new(4)
     expect(board_four.number_of_spots).to eq 16
   end
