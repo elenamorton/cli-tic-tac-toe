@@ -17,10 +17,10 @@ module Iolike
   end
   
   def get_input(message_prompt, validation)
-    prompt message_prompt
+    prompt(message_prompt)
     input = incoming.gets.chomp
     return input if input =~ validation
-    invalid_data input
+    invalid_data(input)
     get_input(message_prompt, validation)
   end
   
