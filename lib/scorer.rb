@@ -45,4 +45,4 @@ class Scorer
   end
   
   
- end
+end
