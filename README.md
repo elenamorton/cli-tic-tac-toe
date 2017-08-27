@@ -1,5 +1,7 @@
-# Tic Tac Toe Game - console (CLI) version
+[![CodeClimate](https://codeclimate.com/github/elenamorton/cli-tic-tac-toe/badges/gpa.svg)](https://codeclimate.com/github/elenamorton/cli-tic-tac-toe)
 
+
+# Tic Tac Toe Game - console (CLI) version
 
 ## Usage Instructions
 * clone the repo and install the Ruby gems
