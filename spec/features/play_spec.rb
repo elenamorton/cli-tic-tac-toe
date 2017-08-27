@@ -43,9 +43,10 @@ describe Game do
   
   describe 'asking for the user move' do
     
-    it 'inside the board and on unoccupied space' do
+    it 'inside the board and on an valid spaces' do
       marker = Game::O_MARKER
-      spot = io('6').human.get_next_move([2,6])
+      io("\human\ncomputer\no\nx\neasy\n1\n").user_setup_game
+      spot = 6
       board_play.place_marker(marker, spot)
       io.display_board(board_play)
       expect(output).to eq " 0 | 1 | 2 \n" \
@@ -55,35 +56,10 @@ describe Game do
                           " #{marker} | 7 | 8 \n"
     end
     
-    it 'inside the board and on an valid spaces: 1, 3, and 8 ' do
-      marker = Game::O_MARKER
-      spot = io("1\n3\n8\n6\n").human.get_next_move([2,6])
-      board_play.place_marker(marker, spot)
-      io.display_board(board_play)
-      expect(output).to eq " 0 | 1 | 2 \n" \
-                          "===+===+===\n" \
-                          " 3 | 4 | 5 \n" \
-                          "===+===+===\n" \
-                          " #{marker} | 7 | 8 \n"
-    end
-    
-    it 'inside the board and on an invalid space' do
-      marker = Game::O_MARKER
-      spot = io("6\n").human.get_next_move([6])
-      board_play.place_marker(marker, spot)
-      io.display_board(board_play)
-      expect(output).to eq " 0 | 1 | 2 \n" \
-                          "===+===+===\n" \
-                          " 3 | 4 | 5 \n" \
-                          "===+===+===\n" \
-                          " #{marker} | 7 | 8 \n"
-      io("1\n6\n").human.get_next_move([6])
-      expect(output).to include "You've entered 1, which is invalid\n"
-    end
   end
 
   it 'play a full game, user starts in a corner' do
-    io("8\n6\n1\n5\n0\n3\n7\n").start_game
+    io("\human\nhuman\no\nx\n1\n0\n1\n4\n5\n8\n").start_game
     expect(output).to include Game::O_MARKER
     expect(output).to include Game::X_MARKER
     expect(output).to include 'Game over'
@@ -91,7 +67,7 @@ describe Game do
   end
     
   it 'play a full game, user starts in the center' do
-    io("4\n8\n2\n6\n7\n5\n3\n").start_game
+    io("\human\nhuman\no\nx\n2\n1\n4\n8\n2\n6\n7\n5\n3\n0\n").start_game
     expect(output).to include Game::O_MARKER
     expect(output).to include Game::X_MARKER
     expect(output).to include 'Game over'
