@@ -28,6 +28,7 @@ class Game
     @opposing_player = nil
     
     @markers = []
+    @difficulty = :easy
     
     self.outgoing = outgoing
     self.incoming = incoming
@@ -38,7 +39,7 @@ class Game
   def start_game
     
     user_setup_game
-    
+ 
     # start by printing the board
     display_board(@board_play)
     
@@ -57,18 +58,19 @@ class Game
     outgoing.puts board_play.board_stringify
   end
   
+  def user_setup_game
+    user_choose_players
+    user_choose_marker_symbols
+    choose_difficulty_level if players.include? :computer
+    create_players
+    setup_players_order
+  end
+  
   def game_is_over?
     @scorer.win? || @board_play.tie?
   end
   
   private
-  
-  def user_setup_game
-    user_choose_players
-    user_choose_marker_symbols
-    create_players
-    setup_players
-  end
   
   def post_move_updates(marker, spot)
     @board_play.place_marker(marker, spot)
@@ -85,6 +87,10 @@ class Game
     @markers << get_input("Please, choose a player symbol (X|other letter)", /^([a-z]{1})/i).upcase
     @markers << get_input("Please, choose the other player symbol (O|other letter)", /^([a-z]{1})/i).upcase
   end
+  
+  def choose_difficulty_level
+    @difficulty = get_input("Please, choose the difficulty level (easy|medium|hard)", /\Aeasy|medium|hard\z/).to_sym
+  end
     
   def create_players
     @players[0] = create_player(player_1, @markers.first)
@@ -100,7 +106,7 @@ class Game
     end
   end
   
-  def setup_players
+  def setup_players_order
     player = get_input("Please, choose which players goes first (1|2)", /\A1|2\z/)
     @current_player, @opposing_player = player_1, player_2 if player == '1'
     @current_player, @opposing_player = player_2, player_1 if player == '2'
