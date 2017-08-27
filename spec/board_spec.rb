@@ -32,7 +32,7 @@ describe 'Board' do
   end
   
   describe 'checks for tie' do
-    it 'updates one spot a marker, no tie' do
+    it 'updates one spot with a marker, no tie' do
       board.place_marker("X", 4)
       expect(board.content_of(4)).to eq "X"
       expect(board.tie?).to be false
