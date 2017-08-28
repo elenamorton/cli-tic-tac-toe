@@ -28,6 +28,11 @@ class Computer
       @scorer.calculate_score(score_table_copy, move, @marker)
       if @scorer.win?
         return move
+      else
+        @scorer.calculate_score(score_table_copy, move, @marker)
+        if @scorer.win?
+          return move
+        end
       end
     end
     valid_moves.sample
