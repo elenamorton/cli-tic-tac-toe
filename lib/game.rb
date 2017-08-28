@@ -6,8 +6,8 @@ require_relative 'iolike'
 
 class Game
     
-  attr_accessor :outgoing, :incoming, :current_player, :players
-  attr_reader :human
+  attr_accessor :outgoing, :incoming
+  attr_reader :current_player, :players
   
   O_MARKER = "O"
   X_MARKER = "X"
@@ -125,6 +125,3 @@ class Game
   end
   
 end
-
-#game = Game.new
-#game.start_game
