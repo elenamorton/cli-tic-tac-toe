@@ -227,6 +227,9 @@ This should be done either,
 * or, inside the `board` object, by extending the `board_stringify`, to add a line separator like `"+++=+++=+++\n"`, or even a simply empty line `"\n"`
 
 ### Allow displaying of the game results  as win/tie
+When the game is over, it would be nice to know how this has finished, if a tie, or a win. For a win, would be good to display the winner.
+* we can expand the 'game' before displaying the `outgoing.puts "Game over"`, to check if `@scorer.win?`. If true, we identify the player with the absolute score `3` and set it in a `winner` variable so as we can display `"The winner is #{winner}!\n"`, followed by the `Game over` message.
+* if not a win, we can add a check for `@board_play.tie?`. If true, we add the message `This is a tie!`, then display the `Game over` message.
 
 ### Game setup using a configuration file
 
