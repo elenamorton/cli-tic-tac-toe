@@ -27,7 +27,7 @@ $ rspec
 `9 file(s) with 100% coverage not shown`
 
 * run the CLI application.
-> We have to make sure the script marked as is executable. If it is not, please run the command `chmod +x app.rb`
+> We have to make sure the script is marked as executable. If it is not, please run the command `chmod +x app.rb`
 ```sh
 $ ./app.rb
 ```
@@ -41,7 +41,9 @@ $ ./app.rb
 ### User Stories
 
 ```sh
-
+As a user
+So as I can have a nice time
+I'd like to be able to play tic-tac-toe game
 ```
 
 
