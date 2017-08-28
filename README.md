@@ -85,7 +85,10 @@ This class is intantiated by the application script `app.rb`.
 The `board` instance variable is set up an as array of ordered strings, starting `'0'` up to `width**2`. Each value string is the `i.to_s` array position. 
 The actual `board` is never seen by the `game`, this always receives a copy of the `board` for handling. The `board` variable instance is updating by `board` object with the symbol a player has used for its move, by calling `@board_play.place_marker(marker, spot)`.
 * The `Scorer` class is handling the game score. It is the instantiated when a `Game` is started, and updated by the `game` object after each player makes a valid move in the `post_move_updates` by calling `@scorer.calculate_score(spot, marker)`.
+The `scorer` object is independent on the players symbols. It is only setup one with value `+1` and the other with `-1` for calculating a move score. 
+A `score_table` is a hash table with 8 elements for a '3 x 3' grid. It contains a key for each row, coloumn, diagonal, and anti-diagonal such as `{:D=>-1, :antiD=>-3, :R0=>0, :R1=>0, :R2=>-1, :C0=>0, :C1=>0, :C2=>-1}`
 A `score_table` copy is used by the `computer` player for calculating its next best move. Although, not fully implemented at this moment, only the basic support is provided.
+A `win` happens when any absolute value in the `@score_table` is equal `3.`
 * The `Human` class
 * The `Computer` class
 * The `IOlike` module is handling all the input/output operations required by the `game`, `human` player, or `rspec` tests. Additionally, the `get_input` message handles gracefully a bad user input, by reprinting the message with expected input until user introduces the correct input. 
