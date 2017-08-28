@@ -78,7 +78,7 @@ I'd like to be able to select the players symbols they mark their moves
 
 ### Current Limitations
 * The computer difficulty level is not currently implemented in the Computer class. The current implementation is a 'easy' level. The compuer player is practically choosing the next move randomly from a valid moves array.
-Please, see the 'Future extensions' section for implementations suggestions.
+Please, see the 'Future extensions' section for implementation suggestions.
 ```ruby
  def get_best_move(valid_moves, depth, best_score = {})
     score_table_copy = @scorer.score_table.dup
@@ -92,7 +92,7 @@ Please, see the 'Future extensions' section for implementations suggestions.
   end
 ```
 
-### Results
+### Results of a game play betwen two Computer players:
 
 ```sh
 $ ./app.rb
