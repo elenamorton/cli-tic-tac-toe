@@ -73,12 +73,23 @@ I'd like to be able to select the players symbols they mark their moves
 * The user is inputting all the moves, each at a time, for any 'Human' player.
 
 ### Design Decisions
+The current design contains five classes `Game, Board, Scorer, Human, and Computer`,  and an IO module.
+* The main class is the `Game` class, that is containing all the game configuration data, creates all required objects based on game setup data, and handles the game flow.
+This class is intantiated by the application script `app.rb`.
+* The `Board` class is instantiated when a `Game` is started and updated by the `game` object after each player makes a valid move. The `Board` default width is '3', but it can be set by `game` to any other number.
+The actual `board` is set up an as array of ordered strings, strating '0' up to `width**2`. Each value string is the `i.to-s` array position.
+* The `Scorer` class
+* The `Human` class
+* The `Computer` class
+* The `IOlike` module is handling all the input/output operations required by the `game`, `human` player, or `rspec` tests. Additionally, the `get_input` message handles gracefully a bad user input, by reprinting the message with expected input until user introduces the correct input. 
+
 #### Class initialisations
 #### Class diagram
 
 ### Current Limitations
-* The computer difficulty level is not currently implemented in the Computer class. The current implementation is a 'easy' level. The compuer player is practically choosing the next move randomly from a valid moves array.
+The computer difficulty level is not currently implemented in the Computer class. The current implementation is a 'easy' level. The compuer player is practically choosing the next move randomly from a valid moves array.
 Please, see the 'Future extensions' section for implementation suggestions.
+
 ```ruby
   def get_best_move(valid_moves, depth, best_score = {})
     score_table_copy = @scorer.score_table.dup
