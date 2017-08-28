@@ -26,15 +26,10 @@ $ rspec
 
 `9 file(s) with 100% coverage not shown`
 
-* run the CLI application:
-> Change firstly the "./lib/game.rb" file to uncomment the last two lines, as:
+* run the CLI application.
+> We have to make sure the script marked as is executable. If it is not, please run the command `chmod +x app.rb`
 ```sh
-game = Game.new
-game.start_game
-```
-> Save the file and start up the CLI application
-```sh
-$ ruby ./lib/game.rb
+$ ./app.rb
 ```
 
 ### Used Technologies
@@ -65,4 +60,46 @@ $ ruby ./lib/game.rb
 
 ### Results
 
+```sh
+$ ruby app.rb
+Please, choose a player (human|computer): human
+Please, choose another player (human|computer): computer
+Please, choose a player symbol (X|other letter): x
+Please, choose the other player symbol (O|other letter): o
+Please, choose the difficulty level (easy|medium|hard): easy
+Please, choose which players goes first (1|2): 2
+ 0 | 1 | 2 
+===+===+===
+ 3 | 4 | 5 
+===+===+===
+ 6 | 7 | 8 
+ 0 | 1 | 2 
+===+===+===
+ 3 | O | 5 
+===+===+===
+ 6 | 7 | 8 
+Enter your move: 8
+ 0 | 1 | 2 
+===+===+===
+ 3 | O | 5 
+===+===+===
+ 6 | 7 | X 
+ 0 | 1 | O 
+===+===+===
+ 3 | O | 5 
+===+===+===
+ 6 | 7 | X 
+Enter your move: 3
+ 0 | 1 | O 
+===+===+===
+ X | O | 5 
+===+===+===
+ 6 | 7 | X 
+ 0 | 1 | O 
+===+===+===
+ X | O | 5 
+===+===+===
+ O | 7 | X 
+Game over
+```
 ## Future extensions
