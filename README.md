@@ -206,8 +206,28 @@ Please, choose which players goes first (1|2): 1
 Game over
 ```
 ## 4. Future extensions
+At present, the following four categories are provided suggestions for improvement.
 
-### Improve game output layout
-### Display of the game results (win/tie)
+### Improve the game output layout
+The current game layout is lacking separation between the players moves, noticed especially when a game `computer v.computer` is played.
+```sh
+ Z | 1 | O 
+===+===+===
+ Z | O | O 
+===+===+===
+ 6 | Z | 8 
+ Z | 1 | O 
+===+===+===
+ Z | O | O 
+===+===+===
+ 6 | Z | O 
+```
+This should be done either, 
+* by introducing a message after the board is displayed, like `Next player move`, that can be done in `game` object, extending the `display_board(board_play)` with an `outgoing.puts 'Next player move'`;
+* or, inside the `board` object, by extending the `board_stringify`, to add a line separator like `"+++=+++=+++\n"`, or even a somply empty line `"\n"`
+
+### Allow displaying of the game results  as win/tie
+
 ### Game setup using a configuration file
+
 ### Computer difficulty level implementation
