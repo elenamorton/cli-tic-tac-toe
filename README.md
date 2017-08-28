@@ -32,7 +32,7 @@ $ rspec
 $ ./app.rb
 ```
 
-### Used Technologies
+#### Used Technologies
 * ruby 2.3.4p301
 * rspec (3.6.0)
 * simplecov (0.15.0)
