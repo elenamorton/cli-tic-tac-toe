@@ -68,7 +68,9 @@ I'd like to be able to select the players symbols they mark their moves
 ## 3. Application design
 
 ### Asumptions
-* The user 
+* The user is providing all the game setup information at the start of game, via console inputs, answering to the questions printed on the screen.
+* The user is not choosing the same symbol marker for both players.
+* The user is inputting all the moves, each at a time, for any 'Human' player.
 
 ### Implementation
 
