@@ -238,3 +238,13 @@ The `app` can check if the config file exists. If true, it should pass it to the
 * Other suggestion can be to use a `Config` module using `ostruct`.
 
 ### Computer difficulty level implementation
+While trying to implement this feature, I searched the internet and came across the following [site](http://www.hamedahmadi.com/gametree/ An Introduction to Game Tree Algorithms), 
+that presents a few methods for implementing games with two players with `zero sum`, i.e the total amount of 'payoff' is constant. Examples of the methods are: 'the game tree', 'minimax algorithm', 'negamax algorithm', 'alpha-beta pruning and branching', 'the horizon effect'.
+The list is not exclusive, other methods do exist.  
+
+My current implementation for the `score_table` is complying with the 'constant payoff' rule, and I came up with this before reading the above link. I was thinking of a hash to keep the score, and found the 'scheme' of one player score changing with '+1' and the other with '-1'.
+This calculation suggests `any game situation is as good for player A as it is bad for player B, and vice versa`. Additionally, the game is finite. `A finite game is a game in which every possible combination of moves leads to an end of the game. That is, it is impossible for the game to go on forever!`  
+
+The main idee about adding a difficulty level to the `computer` player, is to improve its moves until unbeatable. All these algorithm try to 'look forward' a few moves, and each is doing this in a different way.
+![Game tree](./docs/game_tree.png)
+
