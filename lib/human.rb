@@ -2,7 +2,7 @@ require_relative 'iolike'
 
 class Human
     
-  attr_reader :marker, :spot, :name, :incoming, :outgoing
+  attr_reader :marker, :name, :incoming, :outgoing
   include Iolike
     
   def initialize(outgoing, incoming, parameters)
