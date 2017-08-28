@@ -57,8 +57,8 @@ So as I can decide on computer play level
 I'd like to see the options available
 
 As a user
-So as I can make a choices
-I'd like to be able to select the computer play level
+So as I can make a choice the computer play level
+I'd like to be able to select it
 ```
 
 
