@@ -3,7 +3,7 @@
 
 # Tic Tac Toe Game - console (CLI) version
 
-## Usage Instructions
+## 1. Usage Instructions
 * clone the repo and install the Ruby gems
 ```sh
 $ git clone https://github.com/elenamorton/cli-tic-tac-toe.git
@@ -37,7 +37,7 @@ $ ./app.rb
 * rspec (3.6.0)
 * simplecov (0.15.0)
 
-## Specification
+## 2. Specification
 
 ### Headline specifications
 * Allow the user to choose the level of difficulty (“easy” means the computer can easily be beaten, “medium” means it can be beaten but only with a series of intelligent moves, and “hard” means the it is unbeatable).
@@ -73,12 +73,7 @@ So as I can see the players moves on the game board
 I'd like to be able to select the players symbols they mark their moves
 ```
 
-
-
-
-
-
-## Application design
+## 3. Application design
 
 ### Asumptions
 
@@ -141,4 +136,4 @@ Please, choose which players goes first (1|2): 1
  6 | Z | O 
 Game over
 ```
-## Future extensions
+## 4. Future extensions
