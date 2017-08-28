@@ -89,7 +89,8 @@ The `scorer` object is independent on the players symbols. It is only setup one 
 A `score_table` is a hash table with 8 elements for a '3 x 3' grid. It contains a key for each row, coloumn, diagonal, and anti-diagonal such as `{:D=>-1, :antiD=>-3, :R0=>0, :R1=>0, :R2=>-1, :C0=>0, :C1=>0, :C2=>-1}`
 A `score_table` copy is used by the `computer` player for calculating its next best move. Although, not fully implemented at this moment, only the basic support is provided.
 A `win` happens when any absolute value in the `@score_table` is equal `3.`
-* The `Human` class
+* The `Human` class is instantiated by the `game` after the user chooses the players type. It can be instantiated once in a `human v. computer` game, or twice in a `human v. human` game.
+Each instance is injected a `scorer` dependency for future support of difficulty play levels used by `computer`.
 * The `Computer` class
 * The `IOlike` module is handling all the input/output operations required by the `game`, `human` player, or `rspec` tests. Additionally, the `get_input` message handles gracefully a bad user input, by reprinting the message with expected input until user introduces the correct input. 
 
