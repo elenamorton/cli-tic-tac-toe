@@ -16,15 +16,7 @@ $ rspec
 ```
 * test coverage
 
-`COVERAGE:  98.37% -- 361/367 lines in 12 files`
-
-| coverage | file | lines | missed | missing
-| ---------- | ------------------- | ------- | -------- | --------------:
-| 80.00% | lib/iolike.rb | 20 | 4 | 4, 8, 12, 16
-| 96.00% | lib/computer.rb | 25 | 1 | 35
-| 96.77% | spec/game_spec.rb | 31 | 1 | 13
-
-`9 file(s) with 100% coverage not shown`
+![Test coverage](./docs/coverage.png)
 
 * run the CLI application.
 > We have to make sure the script is marked as executable. If it is not, please run the command `chmod +x app.rb`
