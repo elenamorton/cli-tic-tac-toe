@@ -67,6 +67,10 @@ I'd like to be able to select the players type
 As a user
 So as I can make a choice about the players order
 I'd like to be able to select the which players starts first
+
+As a user
+So as I can see the players moves on the game board
+I'd like to be able to select the players symbols they mark their moves
 ```
 
 
