@@ -24,10 +24,10 @@ class Computer
   
   def get_best_move(valid_moves, depth, best_score = {})
     score_table_copy = @scorer.score_table.dup
-    valid_moves.each do |as|
-      @scorer.calculate_score(score_table_copy, as, @marker)
+    valid_moves.each do |move|
+      @scorer.calculate_score(score_table_copy, move, @marker)
       if @scorer.win?
-        return as
+        return move
       end
     end
     valid_moves.sample
