@@ -63,6 +63,10 @@ I'd like to be able to select it
 As a user
 So as I can make a choice about the players
 I'd like to be able to select the players type
+
+As a user
+So as I can make a choice about the players order
+I'd like to be able to select the which players starts first
 ```
 
 
