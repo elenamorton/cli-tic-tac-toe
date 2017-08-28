@@ -41,7 +41,7 @@ $ ./app.rb
 
 ### Headline specifications
 * Allow the user to choose the level of difficulty (“easy” means the computer can easily be beaten, “medium” means it can be beaten but only with a series of intelligent moves, and “hard” means the it is unbeatable).
-* Allow the user to choose the gam type (human v. human, computer v. computer, human v. computer).
+* Allow the user to choose the game type (human v. human, computer v. computer, human v. computer).
 * Allow the user to choose which player goes first.
 * Allow the user to choose with what "symbol" the players will mark their selections on the board (traditionally it's "X" and "O")
 
@@ -59,6 +59,10 @@ I'd like to see the options available
 As a user
 So as I can make a choice the computer play level
 I'd like to be able to select it
+
+As a user
+So as I can make a choice about the players
+I'd like to be able to select the players type
 ```
 
 
