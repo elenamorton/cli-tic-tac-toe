@@ -224,7 +224,7 @@ The current game layout is lacking separation between the players moves, noticed
 ```
 This should be done either, 
 * by introducing a message after the board is displayed, like `Next player move`, that can be done in `game` object, extending the `display_board(board_play)` with an `outgoing.puts 'Next player move'`;
-* or, inside the `board` object, by extending the `board_stringify`, to add a line separator like `"+++=+++=+++\n"`, or even a somply empty line `"\n"`
+* or, inside the `board` object, by extending the `board_stringify`, to add a line separator like `"+++=+++=+++\n"`, or even a simply empty line `"\n"`
 
 ### Allow displaying of the game results  as win/tie
 
