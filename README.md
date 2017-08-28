@@ -96,6 +96,7 @@ Each instance is injected a `scorer` dependency for calculating the computer bes
 * The `IOlike` module is handling all the input/output operations required by the `game`, `human` player, or `rspec` tests. Additionally, the `get_input` message handles gracefully a bad user input, by reprinting the message with expected input until user introduces the correct input. 
 
 #### Class diagram
+![Class diagram](./docs/class_diagram.png)
 
 #### Objects creation
 * _Game_ class instantiation
