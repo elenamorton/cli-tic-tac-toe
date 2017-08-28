@@ -5,13 +5,13 @@
 
 ## Usage Instructions
 * clone the repo and install the Ruby gems
-```shell
+```sh
 $ git clone https://github.com/elenamorton/cli-tic-tac-toe.git
 $ cd cli-tic-tac-toe
 $ bundle install
 ```
 * run tests
-```shell
+```sh
 $ rspec
 ```
 * test coverage
@@ -28,14 +28,12 @@ $ rspec
 
 * run the CLI application:
 > Change firstly the "./lib/game.rb" file to uncomment the last two lines, as:
->```shell
-game = Game.new
-game.start_game
->```
->Save the file and start up the CLI application
->```shell
+> `game = Game.new`
+> `game.start_game`
+> Save the file and start up the CLI application
+```sh
 $ ruby ./lib/game.rb
->```
+```
 
 ### Used Technologies
 * ruby 2.3.4p301
@@ -45,7 +43,7 @@ $ ruby ./lib/game.rb
 ## Specification
 ### User Stories
 
-```shell
+```sh
 
 ```
 
