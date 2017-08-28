@@ -16,8 +16,6 @@ $ rspec
 ```
 * test coverage
 
-**30 examples, 0 failures**
-
 `COVERAGE:  98.37% -- 361/367 lines in 12 files`
 
 coverage | file | lines | missed | missing
