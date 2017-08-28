@@ -76,8 +76,10 @@ I'd like to be able to select the players symbols they mark their moves
 ## 3. Application design
 
 ### Asumptions
+* The user 
 
 ### Implementation
+
 #### Class diagram
 
 ### Limitations
@@ -137,3 +139,7 @@ Please, choose which players goes first (1|2): 1
 Game over
 ```
 ## 4. Future extensions
+
+### Computer difficulty level implementation
+
+### Game setup using a configuration file
