@@ -107,6 +107,22 @@ game.start_game
 ```ruby
 @scorer = Scorer.new({:width => @width, :x_marker => X_MARKER, :o_marker => O_MARKER})
 ```
+* Human class initialisation
+```ruby
+@players[] = Human.new(outgoing, incoming, {:width => @width, :marker => marker, :scorer => @scorer})
+```
+* Computer class initialisation 
+```ruby
+@players[] = Computer.new({:width => @width, :marker => marker, :scorer => @scorer, :depth => 0})
+```
+* Current and opposing players are selected based on user input choice
+```ruby
+  def setup_players_order
+    player = get_input("Please, choose which players goes first (1|2)", /\A1|2\z/)
+    @current_player, @opposing_player = player_1, player_2 if player == '1'
+    @current_player, @opposing_player = player_2, player_1 if player == '2'
+  end
+```
 
 ### Current Limitations
 The computer difficulty level is not currently implemented in the Computer class. The current implementation is a 'easy' level. The compuer player is practically choosing the next move randomly from a valid moves array.
