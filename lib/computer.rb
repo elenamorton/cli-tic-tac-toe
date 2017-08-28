@@ -29,7 +29,6 @@ class Computer
       if @scorer.win?
         return as
       else
-        #board[as] = @hum
         @scorer.calculate_score(score_table_copy, as, @marker)
         if @scorer.win?
           return as
