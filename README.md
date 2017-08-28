@@ -16,7 +16,7 @@ $ rspec
 ```
 * test coverage
 
-![Test coverage](./docs/coverage.png)
+![Test coverage](./docs/coverage_new.png)
 
 * run the CLI application.
 > We have to make sure the script is marked as executable. If it is not, please run the command `chmod +x app.rb`
@@ -80,12 +80,17 @@ I'd like to be able to select the players symbols they mark their moves
 * The computer difficulty level is not currently implemented in the Computer class. The current implementation is a 'easy' level. The compuer player is practically choosing the next move randomly from a valid moves array.
 Please, see the 'Future extensions' section for implementation suggestions.
 ```ruby
- def get_best_move(valid_moves, depth, best_score = {})
+  def get_best_move(valid_moves, depth, best_score = {})
     score_table_copy = @scorer.score_table.dup
     valid_moves.each do |move|
       @scorer.calculate_score(score_table_copy, move, @marker)
       if @scorer.win?
         return move
+      else
+        @scorer.calculate_score(score_table_copy, move, @marker)
+        if @scorer.win?
+          return move
+        end
       end
     end
     valid_moves.sample
