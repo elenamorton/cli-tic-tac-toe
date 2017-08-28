@@ -18,24 +18,24 @@ $ rspec
 
 `COVERAGE:  98.37% -- 361/367 lines in 12 files`
 
-coverage | file | lines | missed | missing
----------- | ------------------- | ------- | -------- | --------------:
-80.00% | lib/iolike.rb | 20 | 4 | 4, 8, 12, 16
-96.00% | lib/computer.rb | 25 | 1 | 35
-96.77% | spec/game_spec.rb | 31 | 1 | 13
+| coverage | file | lines | missed | missing
+| ---------- | ------------------- | ------- | -------- | --------------:
+| 80.00% | lib/iolike.rb | 20 | 4 | 4, 8, 12, 16
+| 96.00% | lib/computer.rb | 25 | 1 | 35
+| 96.77% | spec/game_spec.rb | 31 | 1 | 13
 
 `9 file(s) with 100% coverage not shown`
 
 * run the CLI application:
 > Change firstly the "./lib/game.rb" file to uncomment the last two lines, as:
-```shell
+>```shell
 game = Game.new
 game.start_game
-```
-Save the file and start up the CLI application
-```shell
+>```
+>Save the file and start up the CLI application
+>```shell
 $ ruby ./lib/game.rb
-```
+>```
 
 ### Used Technologies
 * ruby 2.3.4p301
