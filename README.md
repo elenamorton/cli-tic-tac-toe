@@ -76,18 +76,37 @@ I'd like to be able to select the players symbols they mark their moves
 The current design contains five classes `Game, Board, Scorer, Human, and Computer`,  and an IO module `IOlike`.
 The design tries to follow SOLID principles, each class having single responsibility (athough `game` is more fat), DRY code, 
 creating loose class dependencies by dependency injections (`game` injects `scorer` object to each `player` objects). 
-Encapsulation is served by hidding the `board` and `score` tables inside their own objects, everyone communicating with these objects receiving copies of the tables to use. 
+Encapsulation is served by hidding the `board` and `score` tables inside their own objects, everyone communicating with these objects receiving copies of the tables to use.
+Duck-typing is achieved by unifying the `human` and `computer` players behaviour, publishing a common API method for both: `move = @current_player.get_next_move(@valid_moves)`
+
 * The main class is the `Game` class, that is containing all the game configuration data, creates all required objects based on game setup data, and handles the game flow.
 This class is intantiated by the application script `app.rb`.
 * The `Board` class is instantiated when a `Game` is started and updated by the `game` object after each player makes a valid move. The `board` default width is `3`, but it can be set by `game` to any other number.
-The actual `board` is set up an as array of ordered strings, starting `'0'` up to `width**2`. Each value string is the `i.to_s` array position. The actual `board` is never seen by the `game`, this always receives a copy of the `board` for handling. The `board` variable instance is updating itself with the symbol a player has used for its move.
-* The `Scorer` class
+The `board` instance variable is set up an as array of ordered strings, starting `'0'` up to `width**2`. Each value string is the `i.to_s` array position. 
+The actual `board` is never seen by the `game`, this always receives a copy of the `board` for handling. The `board` variable instance is updating by `board` object with the symbol a player has used for its move, by calling `@board_play.place_marker(marker, spot)`.
+* The `Scorer` class is handling the game score. It is the instantiated when a `Game` is started, and updated by the `game` object after each player makes a valid move in the `post_move_updates` by calling `@scorer.calculate_score(spot, marker)`.
+A `score_table` copy is used by the `computer` player for calculating its next best move. Although, not fully implemented at this moment, only the basic support is provided.
 * The `Human` class
 * The `Computer` class
 * The `IOlike` module is handling all the input/output operations required by the `game`, `human` player, or `rspec` tests. Additionally, the `get_input` message handles gracefully a bad user input, by reprinting the message with expected input until user introduces the correct input. 
 
-#### Class initialisations
 #### Class diagram
+
+#### Class initialisations
+* Game class initialisation
+```ruby
+game = Game.new
+game.start_game
+```
+* Board class initialisation
+```ruby
+@board_play = Board.new(@width)
+@board = @board_play.board
+```
+* Scorer class initialisation 
+```ruby
+@scorer = Scorer.new({:width => @width, :x_marker => X_MARKER, :o_marker => O_MARKER})
+```
 
 ### Current Limitations
 The computer difficulty level is not currently implemented in the Computer class. The current implementation is a 'easy' level. The compuer player is practically choosing the next move randomly from a valid moves array.
