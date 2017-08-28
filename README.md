@@ -74,10 +74,11 @@ I'd like to be able to select the players symbols they mark their moves
 
 ### Design Decisions
 The current design contains five classes `Game, Board, Scorer, Human, and Computer`,  and an IO module `IOlike`.
+The design tries to follow SOLID principles, each class having single responsibility (athough `game` is more fat), DRY code, creating loose class dependencies by dependency injections (`game` injects `scorer` object to each `player` object)
 * The main class is the `Game` class, that is containing all the game configuration data, creates all required objects based on game setup data, and handles the game flow.
 This class is intantiated by the application script `app.rb`.
-* The `Board` class is instantiated when a `Game` is started and updated by the `game` object after each player makes a valid move. The `Board` default width is `3`, but it can be set by `game` to any other number.
-The actual `board` is set up an as array of ordered strings, starting `'0'` up to `width**2`. Each value string is the `i.to_s` array position.
+* The `Board` class is instantiated when a `Game` is started and updated by the `game` object after each player makes a valid move. The `board` default width is `3`, but it can be set by `game` to any other number.
+The actual `board` is set up an as array of ordered strings, starting `'0'` up to `width**2`. Each value string is the `i.to_s` array position. The actual `board` is never seen by the `game`, this always receives a copy of the `board` for printing. `Board` object is updating itself the with the symbol a player used for its move.
 * The `Scorer` class
 * The `Human` class
 * The `Computer` class
