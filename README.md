@@ -32,15 +32,22 @@ $ rspec
 $ ./app.rb
 ```
 
-### Used Technologies
+#### Used Technologies
 * ruby 2.3.4p301
 * rspec (3.6.0)
 * simplecov (0.15.0)
 
 ## Specification
-### User Stories
 
-```sh
+### Headline specifications
+* Allow the user to choose the level of difficulty (“easy” means the computer can easily be beaten, “medium” means it can be beaten but only with a series of intelligent moves, and “hard” means the it is unbeatable).
+* Allow the user to choose the gam type (human v. human, computer v. computer, human v. computer).
+* Allow the user to choose which player goes first.
+* Allow the user to choose with what "symbol" the players will mark their selections on the board (traditionally it's "X" and "O")
+
+### User Stories extracted from the specification
+
+```
 As a user
 So as I can have a nice time
 I'd like to be able to play tic-tac-toe game
@@ -48,7 +55,7 @@ I'd like to be able to play tic-tac-toe game
 
 
 
-### Requirements
+
 
 
 ## Application design
