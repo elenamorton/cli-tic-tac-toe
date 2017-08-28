@@ -51,6 +51,14 @@ $ ./app.rb
 As a user
 So as I can have a nice time
 I'd like to be able to play tic-tac-toe game
+
+As a user
+So as I can decide on computer play level
+I'd like to see the options available
+
+As a user
+So as I can make a choices
+I'd like to be able to select the computer play level
 ```
 
 
