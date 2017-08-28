@@ -27,7 +27,7 @@ coverage | file | lines | missed | missing
 `9 file(s) with 100% coverage not shown`
 
 * run the CLI application:
->Change firstly the "./lib/game.rb" file to uncomment the last two lines, as:
+> Change firstly the "./lib/game.rb" file to uncomment the last two lines, as:
 ```shell
 game = Game.new
 game.start_game
