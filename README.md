@@ -231,6 +231,10 @@ When the game is over, it would be nice to know how this has finished, if a tie,
 * we can expand the 'game' before displaying the `outgoing.puts "Game over"`, to check if `@scorer.win?`. If true, we identify the player with the absolute score `3` and set it in a `winner` variable so as we can display `"The winner is #{winner}!\n"`, followed by the `Game over` message.
 * if not a win, we can add a check for `@board_play.tie?`. If true, we add the message `This is a tie!`, then display the `Game over` message.
 
-### Game setup using a configuration file
+### Setup game using a configuration file
+* An alternative to user introducing the game configuration from the console, can be to have the configuration available in a file e.g. `setup.cfg`, each line containing a separate input parameter.
+The name of the parameter can be at the beginning of the line, to allow easy identification of parameters, and not rely on the lines order, using a __YAML__, or __JSON__ formats.
+The `app` can check if the config file exists. If true, it should pass it to the `game` when instantiating this object. If false, the `game` with get the input from the console.
+* Other suggestion can be to use a `Config` module using `ostruct`.
 
 ### Computer difficulty level implementation
