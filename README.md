@@ -28,8 +28,10 @@ $ rspec
 
 * run the CLI application:
 > Change firstly the "./lib/game.rb" file to uncomment the last two lines, as:
-> `game = Game.new`
-> `game.start_game`
+```sh
+game = Game.new`
+game.start_game`
+```
 > Save the file and start up the CLI application
 ```sh
 $ ruby ./lib/game.rb
