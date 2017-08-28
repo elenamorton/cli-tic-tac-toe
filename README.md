@@ -73,7 +73,7 @@ I'd like to be able to select the players symbols they mark their moves
 * The user is inputting all the moves, each at a time, for any 'Human' player.
 
 ### Design Decisions
-The current design contains five classes `Game, Board, Scorer, Human, and Computer`,  and an IO module `IOlike`.
+The current design contains five classes `Game, Board, Scorer, Human`, and `Computer`,  and an IO module `IOlike`.
 The design tries to follow SOLID principles, each class having single responsibility (athough `game` is more fat), DRY code, 
 creating loose class dependencies by dependency injections (`game` injects `scorer` object to each `player` objects). 
 Encapsulation is served by hidding the `board` and `score` tables inside their own objects, everyone communicating with these objects receiving copies of the tables to use.
