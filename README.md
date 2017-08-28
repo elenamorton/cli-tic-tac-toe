@@ -92,7 +92,7 @@ Please, see the 'Future extensions' section for implementation suggestions.
   end
 ```
 
-### Results of a game play betwen two Computer players:
+### Results of a game play between two Computer players:
 
 ```sh
 $ ./app.rb
