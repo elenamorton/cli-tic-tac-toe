@@ -61,13 +61,15 @@ $ ./app.rb
 ### Results
 
 ```sh
-$ ruby app.rb
-Please, choose a player (human|computer): human
+$ ./app.rb
+Please, choose a player (human|computer): computer
 Please, choose another player (human|computer): computer
-Please, choose a player symbol (X|other letter): x
-Please, choose the other player symbol (O|other letter): o
+Please, choose a player symbol (X|other letter): 7
+You've entered 7, which is invalid
+Please, choose a player symbol (X|other letter): o
+Please, choose the other player symbol (O|other letter): z
 Please, choose the difficulty level (easy|medium|hard): easy
-Please, choose which players goes first (1|2): 2
+Please, choose which players goes first (1|2): 1
  0 | 1 | 2 
 ===+===+===
  3 | 4 | 5 
@@ -78,28 +80,36 @@ Please, choose which players goes first (1|2): 2
  3 | O | 5 
 ===+===+===
  6 | 7 | 8 
-Enter your move: 8
  0 | 1 | 2 
 ===+===+===
  3 | O | 5 
 ===+===+===
- 6 | 7 | X 
- 0 | 1 | O 
+ 6 | Z | 8 
+ 0 | 1 | 2 
 ===+===+===
- 3 | O | 5 
+ 3 | O | O 
 ===+===+===
- 6 | 7 | X 
-Enter your move: 3
- 0 | 1 | O 
+ 6 | Z | 8 
+ Z | 1 | 2 
 ===+===+===
- X | O | 5 
+ 3 | O | O 
 ===+===+===
- 6 | 7 | X 
- 0 | 1 | O 
+ 6 | Z | 8 
+ Z | 1 | O 
 ===+===+===
- X | O | 5 
+ 3 | O | O 
 ===+===+===
- O | 7 | X 
+ 6 | Z | 8 
+ Z | 1 | O 
+===+===+===
+ Z | O | O 
+===+===+===
+ 6 | Z | 8 
+ Z | 1 | O 
+===+===+===
+ Z | O | O 
+===+===+===
+ 6 | Z | O 
 Game over
 ```
 ## Future extensions
