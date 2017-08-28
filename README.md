@@ -207,7 +207,7 @@ Game over
 ```
 ## 4. Future extensions
 
-### Computer difficulty level implementation
+### Improve game output layout
 ### Display of the game results (win/tie)
 ### Game setup using a configuration file
-### Improve game output layout
+### Computer difficulty level implementation
