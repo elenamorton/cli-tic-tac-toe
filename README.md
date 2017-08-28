@@ -16,7 +16,7 @@ $ rspec
 ```
 * test coverage
 
-![Test coverage](./docs/coverage.png)
+![Test coverage](./docs/coverage_new.png)
 
 * run the CLI application.
 > We have to make sure the script is marked as executable. If it is not, please run the command `chmod +x app.rb`
