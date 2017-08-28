@@ -92,7 +92,7 @@ Please, see the 'Future extensions' section for implementation suggestions.
   end
 ```
 
-### Results of a game play between two Computer players:
+### Output of a game play between two Computer players:
 
 ```sh
 $ ./app.rb
@@ -149,5 +149,6 @@ Game over
 ## 4. Future extensions
 
 ### Computer difficulty level implementation
-
+### Display of the game results (win/tie)
 ### Game setup using a configuration file
+### Improve game output layout
