@@ -72,11 +72,12 @@ I'd like to be able to select the players symbols they mark their moves
 * The user is not choosing the same symbol marker for both players.
 * The user is inputting all the moves, each at a time, for any 'Human' player.
 
-### Implementation
-
+### Design Decisions
+#### Class initialisations
 #### Class diagram
 
-### Limitations
+### Current Limitations
+
 
 ### Results
 
