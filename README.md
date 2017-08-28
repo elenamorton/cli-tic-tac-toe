@@ -92,26 +92,26 @@ A `score_table` copy is used by the `computer` player for calculating its next b
 
 #### Class diagram
 
-#### Class initialisations
-* _Game_ class initialisation
+#### Objects creation
+* _Game_ class intantiation
 ```ruby
 game = Game.new
 game.start_game
 ```
-* _Board_ class initialisation
+* _Board_ class intantiation
 ```ruby
 @board_play = Board.new(@width)
 @board = @board_play.board
 ```
-* _Scorer_ class initialisation 
+* _Scorer_ class intantiation 
 ```ruby
 @scorer = Scorer.new({:width => @width, :x_marker => X_MARKER, :o_marker => O_MARKER})
 ```
-* _Human_ class initialisation
+* _Human_ class intantiation
 ```ruby
 @players[] = Human.new(outgoing, incoming, {:width => @width, :marker => marker, :scorer => @scorer})
 ```
-* _Computer_ class initialisation 
+* _Computer_ class intantiation 
 ```ruby
 @players[] = Computer.new({:width => @width, :marker => marker, :scorer => @scorer, :depth => 0})
 ```
