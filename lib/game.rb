@@ -39,11 +39,8 @@ class Game
   def start_game
     
     user_setup_game
- 
-    # start by printing the board
     display_board(@board_play)
     
-    # loop through until the game was won or tied
     until game_is_over?
       move = @current_player.get_next_move(@valid_moves)
       post_move_updates(@current_player.marker, move)
