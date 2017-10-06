@@ -1,9 +1,9 @@
-require_relative 'iolike'
+require_relative 'io'
 
 class Human
     
   attr_reader :marker, :name, :incoming, :outgoing
-  include Iolike
+  include Io
     
   def initialize(outgoing, incoming, parameters)
     @width = parameters[:width]

@@ -2,7 +2,7 @@ require_relative 'board'
 require_relative 'scorer'
 require_relative 'computer'
 require_relative 'human'
-require_relative 'iolike'
+require_relative 'io'
 
 class Game
     
@@ -34,7 +34,7 @@ class Game
     self.incoming = incoming
   end
 
-  include Iolike
+  include Io
   
   def start_game
     

@@ -1,4 +1,4 @@
-module Iolike
+module Io
   
   def outgoing
     Iolike.outgoing
