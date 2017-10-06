@@ -1,7 +1,7 @@
 require 'spec_helper'
 require File.join(File.dirname(__FILE__), '../lib/', 'board.rb')
 
-describe 'Board' do
+RSpec.describe 'Board' do
   
   subject(:board) { Board.new(Board::GRID_WIDTH) }
     
@@ -18,7 +18,7 @@ describe 'Board' do
     expect(board_four.number_of_spots).to eq 16
   end
   
-  describe 'board spots changes' do
+  context 'board spots changes' do
     
     it 'shows the default content of a board spot' do
       expect(board.content_of(3)).to eq "3"
@@ -31,7 +31,7 @@ describe 'Board' do
     
   end
   
-  describe 'checks for tie' do
+  context 'checks for tie' do
     it 'updates one spot with a marker, no tie' do
       board.place_marker("X", 4)
       expect(board.content_of(4)).to eq "X"

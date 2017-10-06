@@ -1,7 +1,7 @@
 require 'spec_helper'
 require File.join(File.dirname(__FILE__), '../lib/', 'game.rb')
 
-describe 'Game unit tests' do
+RSpec.describe 'Game unit tests' do
   
   def io(input='')
     @incoming = StringIO.new(input)
@@ -21,7 +21,7 @@ describe 'Game unit tests' do
     expect(io.players.empty?).to be true
   end
   
-  describe '#choose players' do
+  context '#choose players' do
   
     it 'user chooses both players as Human' do
       io("human\nhuman\no\nx\n1\n").user_setup_game
@@ -40,7 +40,7 @@ describe 'Game unit tests' do
     end
   end
   
-  describe 'user chooses players order' do
+  context 'user chooses players order' do
     it 'current player is choosen as 1st player' do
       io("human\ncomputer\no\nx\neasy\n1\n").user_setup_game
       expect(input).to include '1'

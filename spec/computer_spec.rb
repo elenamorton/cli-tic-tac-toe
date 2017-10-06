@@ -1,7 +1,7 @@
 require 'spec_helper'
 require File.join(File.dirname(__FILE__), '../lib/', 'computer.rb')
 
-describe 'Computer' do
+RSpec.describe 'Computer' do
   
   subject(:computer) { Computer.new(parameters) }
   let(:parameters) { { :marker => "X", :width => 3, :scorer => scorer, :depth => 0 } }
@@ -16,7 +16,7 @@ describe 'Computer' do
     expect(computer.name).to eq :computer
   end
   
-  describe 'gets next computer move for depth set to 0' do
+  context 'gets next computer move for depth set to 0' do
     
     it 'get move for default center spot' do
       expect(computer.get_next_move([0,1,2,3,4,5,6,7,8])).to eq 4

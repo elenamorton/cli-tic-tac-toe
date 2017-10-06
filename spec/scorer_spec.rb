@@ -1,12 +1,12 @@
 require 'spec_helper'
 require File.join(File.dirname(__FILE__), '../lib/', 'scorer.rb')
 
-describe 'Scorer' do
+Rspec.describe 'Scorer' do
   
   subject(:scorer) { Scorer.new(parameters) }
   let(:parameters) { { :x_marker => "X", :o_marker => "O",  :width => 3 } }
     
-  describe '#score' do
+  context '#score' do
     
     it 'calculates score for an empty board' do
       expect(scorer.calculate_score(3, parameters[:x_marker])).to eq ({:D=>0, :antiD=>0, :R0=>0, :R1=>1, :R2=>0, :C0=>1, :C1=>0, :C2=>0})

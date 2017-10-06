@@ -12,7 +12,7 @@ require File.join(File.dirname(__FILE__), '../../lib/', 'human.rb')
 require File.join(File.dirname(__FILE__), '../../lib/', 'scorer.rb')
 
 
-describe Game do
+RSpec.describe Game do
   
   let(:board_play) { Board.new(Game::BOARD_WIDTH) }
   let(:scorer) { Scorer.new({:width => Game::BOARD_WIDTH, :x_marker => Game::X_MARKER, :o_marker => Game::O_MARKER}) }
@@ -29,7 +29,7 @@ describe Game do
   
   let(:human) { Human.new({:width => Game::BOARD_WIDTH, :marker => Game::O_MARKER, :scorer => scorer, :outgoing => io.outgoing, :incoming => io.incoming }) }
     
-  describe '#display_board' do
+  context '#display_board' do
   
     it 'displaying an starting board of 0 to 8 chars' do
       io.display_board(board_play)
@@ -41,7 +41,7 @@ describe Game do
     end
   end
   
-  describe 'asking for the user move' do
+  context 'asking for the user move' do
     
     it 'inside the board and on an valid spaces' do
       marker = Game::O_MARKER
